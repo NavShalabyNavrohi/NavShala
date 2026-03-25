@@ -433,7 +433,7 @@ body{font-family:system-ui,sans-serif;background:#f5f5f0;color:#1a1a1a;font-size
 @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.12)}100%{transform:scale(1)}}
 /* SR badge */
 .sr-badge{display:inline-flex;align-items:center;gap:4px;background:#fef3c7;border:1px solid #fde047;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:700;color:#854d0e;margin-left:8px}
-.pronounce-popup{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1a1a2e;color:#fff;padding:12px 28px;border-radius:14px;font-size:15px;text-align:center;z-index:9999;pointer-events:none;transition:opacity 0.3s;box-shadow:0 6px 24px rgba(0,0,0,0.3)}
+.pronounce-popup{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1a1a2e;color:#fff;padding:12px 28px 14px;border-radius:14px;font-size:15px;text-align:center;z-index:9999;pointer-events:none;transition:opacity 0.3s;box-shadow:0 6px 24px rgba(0,0,0,0.3)}
 
 
 /* STREAK */
@@ -558,6 +558,145 @@ body{font-family:system-ui,sans-serif;background:#f5f5f0;color:#1a1a1a;font-size
 .sb-banner-num{font-size:32px;font-weight:900;line-height:1}
 .sb-banner-lbl{font-size:13px;opacity:0.85;margin-top:2px}
 .sb-empty{text-align:center;color:#aaa;font-size:13px;padding:12px 0;font-style:italic}
+
+/* ── DARK MODE ─────────────────────────────────────────────────────────────── */
+body.dark,
+@media(prefers-color-scheme:dark){body:not(.light){
+  --dm:1;
+}}
+/* All dark rules under body.dark so manual toggle works cleanly */
+body.dark{background:#0f0f17;color:#e8e8f0}
+body.dark .ob-card{background:#1a1a2e;box-shadow:0 20px 60px rgba(0,0,0,0.7)}
+body.dark .ob-title{color:#e8e8f0}
+body.dark .ob-sub{color:#9999bb}
+body.dark .ob-input{background:#0f0f17;border-color:#3333aa;color:#e8e8f0}
+body.dark .ob-input:focus{border-color:#7c3aed}
+body.dark .ob-lang{color:#5555aa}
+body.dark .nav{background:#1a1a2e;border-bottom-color:#2a2a4e}
+body.dark .nav-btn{color:#9999cc;border-color:#2a2a4e}
+body.dark .nav-btn.active{background:#2563eb;border-color:#2563eb;color:#fff}
+body.dark .nav-btn:hover:not(.active){background:#2a2a4e}
+body.dark .content{color:#e8e8f0}
+body.dark .stab{background:#1a1a2e;border-color:#2a2a4e;color:#9999cc}
+body.dark .stab:hover:not(.active){background:#2a2a4e}
+body.dark .stab.active{background:#2563eb;border-color:#2563eb;color:#fff}
+body.dark .tip-box{background:#1e2d50;border-color:#2563eb;color:#93c5fd}
+body.dark .letter-card{background:#1a1a2e;border-color:#2a2a4e;color:#e8e8f0}
+body.dark .letter-card:hover{border-color:#2563eb;background:#1e2d50}
+body.dark .lc-tamil{color:#e8e8f0}
+body.dark .lc-hindi{color:#6666aa}
+body.dark .combo-wrap{background:#1a1a2e;border-color:#2a2a4e}
+body.dark .ctable th{background:#0f0f17;color:#9999cc;border-color:#2a2a4e}
+body.dark .ctable th.corner{background:#0f0f17}
+body.dark .ctable td{border-color:#2a2a4e;color:#e8e8f0}
+body.dark .ctable td:hover{background:#1e2d50}
+body.dark .ctable td.cons-hdr{background:#131320;border-color:#3333aa}
+body.dark .ct{color:#e8e8f0}
+body.dark .ch{color:#6666aa}
+body.dark .cons-lbl{color:#e8e8f0}
+body.dark .cons-h{color:#6666aa}
+body.dark .word-row{background:#1a1a2e;border-color:#2a2a4e}
+body.dark .word-row:hover{background:#1e2d50;border-color:#2563eb}
+body.dark .wr-tamil{color:#e8e8f0}
+body.dark .wr-hindi{color:#8888bb}
+body.dark .spk-btn{background:#1e2d50;border-color:#2563eb}
+body.dark .sent-card{background:#1a1a2e;border-color:#2a2a4e}
+body.dark .sent-card:hover{background:#1e2d50;border-color:#2563eb}
+body.dark .sc-tamil{color:#e8e8f0}
+body.dark .sc-hindi{color:#8888bb}
+body.dark .num-card{background:#1a1a2e;border-color:#2a2a4e}
+body.dark .num-card:hover{background:#1e2d50;border-color:#2563eb}
+body.dark .num-t{color:#e8e8f0}
+body.dark .vbtn{background:#1a1a2e;border-color:#2a2a4e;color:#9999cc}
+body.dark .vbtn.active{background:#7c3aed;border-color:#7c3aed;color:#fff}
+body.dark .pattern-pill{background:#2a1a4e;border-color:#7c3aed;color:#c4b5fd}
+body.dark .vtable{background:#1a1a2e;border-color:#2a2a4e}
+body.dark .vtable th{background:#131320;color:#9999cc;border-color:#2a2a4e}
+body.dark .vtable td{border-color:#2a2a4e}
+body.dark .vtable td:hover{background:#2a1a4e}
+body.dark .vt{color:#e8e8f0}
+body.dark .vh{color:#8888bb}
+body.dark .quiz-box{background:#1a1a2e;border-color:#2a2a4e}
+body.dark .qbig{color:#e8e8f0}
+body.dark .qhint{color:#6666aa}
+body.dark .qopt{background:#1a1a2e;border-color:#2a2a4e;color:#e8e8f0}
+body.dark .qopt:hover{background:#2a1a4e;border-color:#7c3aed}
+body.dark .q-expl{background:#2a1f00;border-color:#7c5c00}
+body.dark .q-expl-tamil{color:#e8e8f0}
+body.dark .q-expl-eq{color:#fcd34d}
+body.dark .q-expl-note{color:#fcd34d}
+body.dark .nbtn{background:#1a1a2e;border-color:#2a2a4e;color:#e8e8f0}
+body.dark .nbtn:hover{background:#2a2a4e}
+body.dark .flash-card{background:#1a1a2e;border-color:#2a2a4e}
+body.dark .flash-card:hover{border-color:#2563eb}
+body.dark .flash-card.flipped{background:#0f2a1a;border-color:#10b981}
+body.dark .fc-main{color:#e8e8f0}
+body.dark .fc-hint{color:#6666aa}
+body.dark .fc-hindi{color:#8888bb}
+body.dark .gram-rule{background:#1a1a2e;border-color:#2a2a4e}
+body.dark .gram-rule-title{color:#e8e8f0}
+body.dark .gram-rule-body{color:#aaaacc}
+body.dark .gram-example{background:#13131f;border-color:#2a2a4e}
+body.dark .gram-example:hover{background:#1e2d50;border-color:#2563eb}
+body.dark .ge-tamil{color:#e8e8f0}
+body.dark .ge-hindi{color:#8888bb}
+body.dark .dlg-bubble{background:#1a1a2e}
+body.dark .dlg-line.b .dlg-bubble{background:#1e2d50}
+body.dark .dlg-tamil{color:#e8e8f0}
+body.dark .dlg-hindi{color:#8888bb}
+body.dark .dlg-av-a{background:#1e2d50;color:#93c5fd}
+body.dark .dlg-av-b{background:#2a1a4e;color:#c4b5fd}
+body.dark .match-card{background:#1a1a2e;border-color:#2a2a4e;color:#e8e8f0}
+body.dark .match-card:hover{background:#1e2d50;border-color:#2563eb}
+body.dark .match-card.selected{background:#1e2d50;border-color:#2563eb}
+body.dark .match-result{background:#0f2a1a;border-color:#10b981}
+body.dark .match-result-lbl{color:#aaaacc}
+body.dark .match-score-lbl{color:#9999cc}
+body.dark .pbar{background:#2a2a4e}
+body.dark .score-lbl{color:#9999cc}
+body.dark .pstat{background:#1a1a2e;border-color:#2a2a4e}
+body.dark .pstat-num{color:#e8e8f0}
+body.dark .pstat-lbl{color:#6666aa}
+body.dark .level-bar-wrap{background:#1a1a2e;border-color:#2a2a4e}
+body.dark .level-lbl{color:#e8e8f0}
+body.dark .level-bar{background:#2a2a4e}
+body.dark .goal-card{background:#1a1a2e;border-color:#2a2a4e}
+body.dark .goal-title{color:#e8e8f0}
+body.dark .goal-bar{background:#2a2a4e}
+body.dark .goal-opt{background:#1a1a2e;border-color:#2a2a4e;color:#9999cc}
+body.dark .goal-opt.active{background:#2563eb;border-color:#2563eb;color:#fff}
+body.dark .celebration-card{background:#1a1a2e}
+body.dark .cel-title{color:#e8e8f0}
+body.dark .cel-sub{color:#9999cc}
+body.dark .sunit-card{background:#1a1a2e;box-shadow:0 2px 12px rgba(0,0,0,0.4)}
+body.dark .sunit-name{color:#e8e8f0}
+body.dark .sunit-sub{color:#6666aa}
+body.dark .unit-lock-bar{background:#131320;border-color:#2a2a4e;color:#6666aa}
+body.dark .unit-pbar-wrap{background:#0f0f17}
+body.dark .sb-card{background:#1a1a2e;border-color:#2a2a4e}
+body.dark .sb-prompt{color:#6666aa}
+body.dark .sb-hindi{color:#e8e8f0}
+body.dark .sb-drop-zone{background:#1e2d50;border-color:#2563eb}
+body.dark .sb-word{background:#1a1a2e;color:#e8e8f0;border-color:#7c3aed}
+body.dark .sb-word:hover{background:#2a1a4e}
+body.dark .sb-word.placed{background:#1e2d50;border-color:#2563eb}
+body.dark .sb-stat{background:#1a1a2e;color:#9999cc}
+body.dark .sb-answer-reveal{background:#1a1a2e;color:#9999cc}
+body.dark .sb-answer-tamil{color:#e8e8f0}
+body.dark .sb-btn{background:#1a1a2e;border-color:#2a2a4e;color:#9999cc}
+body.dark .analytics-card{background:#1a1a2e;border-color:#2a2a4e}
+body.dark .analytics-title{color:#e8e8f0}
+body.dark .mastery-label{color:#aaaacc}
+body.dark .mastery-bar-wrap{background:#2a2a4e}
+body.dark .mastery-pct{color:#9999cc}
+body.dark .time-cell{background:#131320}
+body.dark .time-cell-lbl{color:#6666aa}
+body.dark .weak-chip{background:#2a0f0f;border-color:#7c2020;color:#f87171}
+body.dark .ndu-cert{background:#1a1a2e}
+body.dark .ndu-cert-title{color:#e8e8f0}
+body.dark #speech-notice{background:#2a1f00;border-color:#7c5c00;color:#fcd34d}
+body.dark input[type=range]{accent-color:#7c3aed}
+body.dark .font-panel,body.dark #font-panel{background:#1a1a2e;border-color:#3333aa}
 </style>
 </head>
 <body>
@@ -595,6 +734,7 @@ body{font-family:system-ui,sans-serif;background:#f5f5f0;color:#1a1a1a;font-size
   <div class="app-logo" style="font-size:16px;font-weight:900;color:#fff;background:linear-gradient(135deg,#7c3aed,#2563eb);font-family:sans-serif">NS</div>
   <div><div class="app-title">NavShala</div><div class="app-subtitle" id="header-sub">नमस्ते!</div></div>
   <div class="header-right">
+    <button id="dark-btn" onclick="toggleDark()" title="Dark mode" style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;border:1px solid #4444aa;background:#2a2a4a;color:#aaaaff;font-size:15px;cursor:pointer;flex-shrink:0">🌙</button>
     <button id="font-size-btn" onclick="toggleFontPanel()" title="Font size" style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;border:1px solid #4444aa;background:#2a2a4a;color:#aaaaff;font-size:13px;font-weight:700;cursor:pointer;flex-shrink:0">A</button>
     <div id="font-panel" style="display:none;position:absolute;top:52px;right:12px;z-index:500;background:#1a1a2e;border:1px solid #3333aa;border-radius:12px;padding:12px 16px;min-width:220px;box-shadow:0 8px 24px rgba(0,0,0,0.4)">
       <div style="font-size:12px;color:#8888aa;margin-bottom:8px;font-weight:600">Font Size — <span id="font-pct-hdr">100%</span></div>
@@ -1253,6 +1393,21 @@ function applyFontSize(val){
 function loadFontSize(){
   try{const v=localStorage.getItem('navshala_fs');if(v)applyFontSize(parseInt(v));}catch(e){}
 }
+function toggleDark(){
+  const isDark=document.body.classList.toggle('dark');
+  document.body.classList.toggle('light',!isDark);
+  document.getElementById('dark-btn').textContent=isDark?'☀️':'🌙';
+  try{localStorage.setItem('navshala_dark',isDark?'1':'0');}catch(e){}
+}
+function loadDarkMode(){
+  try{
+    const saved=localStorage.getItem('navshala_dark');
+    const sysDark=window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches;
+    const useDark=saved!==null?saved==='1':sysDark;
+    if(useDark){document.body.classList.add('dark');document.getElementById('dark-btn').textContent='☀️';}
+    else{document.body.classList.add('light');}
+  }catch(e){}
+}
 function toggleFontPanel(){
   const p=document.getElementById('font-panel');
   if(!p)return;
@@ -1299,6 +1454,7 @@ function initSpeech(){
 // Map of pure consonant (with virama) → spoken syllable (browser TTS fallback only)
 const _csMap={'க்':'கா','ச்':'சா','ட்':'டா','த்':'தா','ப்':'பா','ற்':'றா','ங்':'ஙா','ஞ்':'ஞா','ண்':'ணா','ந்':'நா','ம்':'மா','ன்':'னா','ய்':'யா','ர்':'ரா','ல்':'லா','வ்':'வா','ழ்':'ழா','ள்':'ளா'};
 
+let _slowMode=false;
 function _browserSpeak(text){
   if(!window.speechSynthesis||!speechReady)return;
   try{
@@ -1307,7 +1463,7 @@ function _browserSpeak(text){
     const u=new SpeechSynthesisUtterance(ttsText);
     const v=tamilVoice||fallbackVoice;
     if(v){u.voice=v;u.lang=v.lang;}else u.lang='ta-IN';
-    u.rate=0.75;u.volume=1;
+    u.rate=_slowMode?0.45:0.75;u.volume=1;
     window.speechSynthesis.speak(u);
   }catch(e){}
 }
@@ -1332,7 +1488,7 @@ async function _cloudSpeak(text){
         body:JSON.stringify({
           input:{text:ttsText},
           voice:{languageCode:'ta-IN',name:'ta-IN-Wavenet-A',ssmlGender:'FEMALE'},
-          audioConfig:{audioEncoding:'MP3',speakingRate:0.85,pitch:0}
+          audioConfig:{audioEncoding:'MP3',speakingRate:_slowMode?0.55:0.85,pitch:0}
         })
       }
     );
@@ -1359,7 +1515,27 @@ function speak(text,roman){
   }
 }
 let ppTimer;
-function showPP(t,r){const p=document.getElementById('pp');p.innerHTML='<span style="font-size:22px;display:block;line-height:1.3">'+t+'</span>'+(r?'<span style="font-size:12px;opacity:0.8;display:block;margin-top:3px">'+r+'</span>':'');p.style.opacity='1';clearTimeout(ppTimer);ppTimer=setTimeout(()=>p.style.opacity='0',2800);}
+let _ppLastText='',_ppLastRoman='';
+function showPP(t,r){
+  _ppLastText=t;_ppLastRoman=r||'';
+  const p=document.getElementById('pp');
+  const slowActive=_slowMode?'background:#f59e0b;color:#1a1a2e;':'background:#2a2a4e;color:#facc15;';
+  p.innerHTML=
+    '<span style="font-size:22px;display:block;line-height:1.3">'+t+'</span>'+
+    (r?'<span style="font-size:12px;opacity:0.8;display:block;margin-top:3px">'+r+'</span>':'')+
+    '<div style="display:flex;gap:8px;justify-content:center;margin-top:8px;pointer-events:auto">'+
+      '<button onclick="speak(_ppLastText,_ppLastRoman)" style="background:#2a2a4e;color:#fff;border:none;border-radius:20px;padding:4px 14px;font-size:12px;cursor:pointer;">🔊 फिर सुनें</button>'+
+      '<button id="pp-slow-btn" onclick="toggleSlowMode()" style="'+slowActive+'border:none;border-radius:20px;padding:4px 14px;font-size:12px;cursor:pointer;font-weight:700;">🐢 '+(  _slowMode?'Slow ON':'Slow'  )+'</button>'+
+    '</div>';
+  p.style.opacity='1';p.style.pointerEvents='auto';
+  clearTimeout(ppTimer);
+  ppTimer=setTimeout(()=>{p.style.opacity='0';p.style.pointerEvents='none';},4500);
+}
+function toggleSlowMode(){
+  _slowMode=!_slowMode;
+  if(_ppLastText)speak(_ppLastText,_ppLastRoman);
+  else showPP(_ppLastText,_ppLastRoman);
+}
 function sah(t,el,r){if(el){el.classList.add('speaking');setTimeout(()=>el.classList.remove('speaking'),1300);}speak(t,r);P.heard++;gainXP(1);checkAchs();saveP();trackLessonActivity();}
 
 // ── XP / LEVEL ─────────────────────────────────────────────────────────────────
@@ -1368,8 +1544,8 @@ function gainXP(n){
   addTodayXP(n);
   updateHUD();checkAchs();
 }
-const LEVELS=[{n:'Beginner',m:100},{n:'Learner',m:250},{n:'Intermediate',m:500},{n:'Advanced',m:1000},{n:'Expert',m:99999}];
-function levelInfo(){let prev=0;for(const l of LEVELS){if(P.xp<l.m)return{name:l.name,cur:P.xp-prev,max:l.m-prev};prev=l.m;}return{name:'Expert',cur:0,max:1};}
+const LEVELS=[{n:'Beginner',m:1000},{n:'Learner',m:2500},{n:'Intermediate',m:5000},{n:'Advanced',m:10000},{n:'Expert',m:99999}];
+function levelInfo(){let prev=0;for(const l of LEVELS){if(P.xp<l.m)return{name:l.n,cur:P.xp-prev,max:l.m-prev};prev=l.m;}return{name:'Expert',cur:0,max:1};}
 function updateHUD(){const li=levelInfo();document.getElementById('xp-badge').textContent=P.xp+' XP';document.getElementById('lvl-badge').textContent=li.name;const lf=document.getElementById('level-fill');if(lf)lf.style.width=Math.min(100,Math.round(li.cur/li.max*100))+'%';const ln=document.getElementById('level-name');if(ln)ln.textContent=li.name;const lx=document.getElementById('level-xp');if(lx)lx.textContent=P.xp+' XP ('+li.name+')';}
 let achSet=new Set();
 function checkAchs(){ACHIEVS.forEach(a=>{if(!achSet.has(a.id)&&a.chk()){achSet.add(a.id);if(!P.earned.includes(a.id)){P.earned.push(a.id);saveP();}showAchToast(a);}});}
@@ -2392,7 +2568,7 @@ function renderAnalytics(){
 
 // ── INIT ────────────────────────────────────────────────────────────────────────
 function initApp(){
-  loadFontSize();
+  loadFontSize();loadDarkMode();
   showLetterTab('vowels');buildComboFilter();buildCT();buildWordTabs();showWT('family');
   showNumTab('1-10');buildSentTabs();showST('greetings');buildVerbSel();renderVT();
   buildGramTabs();showGT('basics');buildDlgTabs();showDlg(dlgKeys[0]);
