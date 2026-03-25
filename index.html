@@ -1913,7 +1913,9 @@ function updateHUD(){
   if(tbl){
     const rows=LEVELS.map(l=>{
       const isCur=l.n===li.name;
-      const xpRange=l.m>=99999?'10000+ XP':l.n==='Beginner'?'0 – 999 XP':l.m+' XP needed';
+      const lvIdx=LEVELS.findIndex(x=>x.n===l.n);
+      const prevM=lvIdx===0?0:LEVELS[lvIdx-1].m;
+      const xpRange=l.m>=99999?prevM+'+ XP':prevM+' – '+(l.m-1)+' XP';
       return`<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid #f0f0ea;background:${isCur?'#eff6ff':'#fff'}">
         <span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px;background:${isCur?'#dbeafe':'#f5f5f0'};color:${isCur?'#1e40af':'#555'}">${l.n}</span>
         ${isCur?'<span style="font-size:10px;color:#2563eb;font-weight:700">← you are here</span>':''}
