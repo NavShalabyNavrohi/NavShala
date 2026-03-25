@@ -138,11 +138,26 @@ body{font-family:system-ui,sans-serif;background:#f5f5f0;color:#1a1a1a;font-size
 .word-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;border:1px solid #e8e8e3;margin-bottom:6px;cursor:pointer;background:#fff;transition:all 0.15s}
 .word-row:hover{border-color:#2563eb;background:#eff6ff;transform:translateX(3px)}
 .word-row.speaking{border-color:#10b981;background:#ecfdf5}
+.word-row.spoken-row{border-color:#fcd34d;background:#fffbeb}
+.word-row.spoken-row:hover{border-color:#f59e0b;background:#fef3c7;transform:translateX(3px)}
+.word-row.spoken-row.speaking{border-color:#10b981;background:#ecfdf5}
 .wr-tamil{font-size:calc(19px * var(--fs-scale));min-width:calc(80px * var(--fs-scale));color:#111;font-weight:600}
 .wr-info{flex:1}
 .wr-roman{font-size:calc(13px * var(--fs-scale));color:#2563eb;font-weight:700}
 .wr-hindi{font-size:calc(12px * var(--fs-scale));color:#555}
 .spk-btn{width:28px;height:28px;border-radius:50%;background:#eff6ff;border:1px solid #bfdbfe;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.spoken-row .spk-btn{background:#fef9c3;border-color:#fcd34d}
+.word-style-tag{display:inline-block;font-size:10px;font-weight:700;padding:1px 6px;border-radius:20px;margin-right:5px;vertical-align:middle}
+.tag-formal{background:#eff6ff;color:#1e40af}
+.tag-spoken{background:#fef3c7;color:#92400e}
+body.dark .word-row{background:#1a1a2e;border-color:#2a2a4e}
+body.dark .word-row:hover{background:#1e1e40;border-color:#4444aa}
+body.dark .word-row.spoken-row{background:#2a1f00;border-color:#7c5c00}
+body.dark .word-row.spoken-row:hover{background:#332200;border-color:#a07000}
+body.dark .tag-formal{background:#1e2a4a;color:#93c5fd}
+body.dark .tag-spoken{background:#2a1f00;color:#fcd34d}
+body.dark .spk-btn{background:#1e2040;border-color:#3344aa}
+body.dark .spoken-row .spk-btn{background:#2a1f00;border-color:#7c5c00}
 /* SENTENCES */
 .sent-card{padding:11px 13px;border-radius:10px;border:1px solid #e8e8e3;margin-bottom:7px;cursor:pointer;background:#fff;transition:all 0.15s}
 .sent-card:hover{border-color:#2563eb;background:#eff6ff}
@@ -154,6 +169,16 @@ body{font-family:system-ui,sans-serif;background:#f5f5f0;color:#1a1a1a;font-size
 .tag-basic{background:#f0fdf4;color:#16a34a}
 .tag-intermediate{background:#fef9c3;color:#ca8a04}
 .tag-advanced{background:#fef2f2;color:#dc2626}
+.sent-pair{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:7px}
+.sent-pair .sent-card{margin-bottom:0}
+.sent-card.spoken-sent{border-color:#fcd34d;background:#fffbeb}
+.sent-card.spoken-sent:hover{border-color:#f59e0b;background:#fef3c7}
+.sent-card.spoken-sent.speaking{border-color:#10b981;background:#ecfdf5}
+.sc-style-label{font-size:10px;font-weight:700;padding:1px 6px;border-radius:20px;display:inline-block;margin-bottom:4px}
+.sc-label-formal{background:#eff6ff;color:#1e40af}
+.sc-label-spoken{background:#fef3c7;color:#92400e}
+.sent-card.spoken-sent .sc-roman{color:#b45309}
+@media(max-width:480px){.sent-pair{grid-template-columns:1fr}}
 /* NUMBERS */
 .num-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(calc(88px * var(--fs-scale)),1fr));gap:6px}
 .num-card{background:#fff;border:1px solid #e8e8e3;border-radius:8px;padding:8px 5px;text-align:center;cursor:pointer;transition:all 0.15s}
@@ -604,6 +629,11 @@ body.dark .sent-card{background:#1a1a2e;border-color:#2a2a4e}
 body.dark .sent-card:hover{background:#1e2d50;border-color:#2563eb}
 body.dark .sc-tamil{color:#e8e8f0}
 body.dark .sc-hindi{color:#8888bb}
+body.dark .sent-card.spoken-sent{background:#2a1f00;border-color:#7c5c00}
+body.dark .sent-card.spoken-sent:hover{background:#332200;border-color:#a07000}
+body.dark .sent-card.spoken-sent .sc-roman{color:#fcd34d}
+body.dark .sc-label-formal{background:#1e2a4a;color:#93c5fd}
+body.dark .sc-label-spoken{background:#2a1f00;color:#fcd34d}
 body.dark .num-card{background:#1a1a2e;border-color:#2a2a4e}
 body.dark .num-card:hover{background:#1e2d50;border-color:#2563eb}
 body.dark .num-t{color:#e8e8f0}
@@ -1199,16 +1229,162 @@ const comboRoman={'க்':['ka','kaa','ki','kii','ku','kuu','ke','kee','kai','k
 const comboHindi={'க்':['क','का','कि','की','कु','कू','के','के','कै','को','को','कौ'],'ச்':['स','सा','सि','सी','सु','सू','से','से','सै','सो','सो','सौ'],'ட்':['ट','टा','टि','टी','टु','टू','टे','टे','टै','टो','टो','टौ'],'த்':['त','ता','ति','ती','तु','तू','ते','ते','तै','तो','तो','तौ'],'ப்':['प','पा','पि','पी','पु','पू','पे','पे','पै','पो','पो','पौ'],'ற்':['ड़','ड़ा','ड़ि','ड़ी','ड़ु','ड़ू','ड़े','ड़े','ड़ै','ड़ो','ड़ो','ड़ौ'],'ங்':['ङ','ङा','ङि','ङी','ङु','ङू','ङे','ङे','ङै','ङो','ङो','ङौ'],'ஞ்':['ञ','ञा','ञि','ञी','ञु','ञू','ञे','ञे','ञै','ञो','ञो','ञौ'],'ண்':['ण','णा','णि','णी','णु','णू','णे','णे','णै','णो','णो','णौ'],'ந்':['न','ना','नि','नी','नु','नू','ने','ने','नै','नो','नो','नौ'],'ம்':['म','मा','मि','मी','मु','मू','मे','मे','मै','मो','मो','मौ'],'ன்':['न','ना','नि','नी','नु','नू','ने','ने','नै','नो','नो','नौ'],'ய்':['य','या','यि','यी','यु','यू','ये','ये','यै','यो','यो','यौ'],'ர்':['र','रा','रि','री','रु','रू','रे','रे','रै','रो','रो','रौ'],'ல்':['ल','ला','लि','ली','लु','लू','ले','ले','लै','लो','लो','लौ'],'வ்':['व','वा','वि','वी','वु','वू','वे','वे','वै','वो','वो','वौ'],'ழ்':['ळ','ळा','ळि','ळी','ळु','ळू','ळे','ळे','ळै','ळो','ळो','ळौ'],'ள்':['ळ','ळा','ळि','ळी','ळु','ळू','ळे','ळे','ळै','ळो','ळो','ळौ']};
 
 const wordCategories={
-  family:{label:'Family',words:[{t:'அம்மா',r:'amma',h:'माँ'},{t:'அப்பா',r:'appa',h:'पिताजी'},{t:'அண்ணன்',r:'annan',h:'बड़ा भाई'},{t:'அக்கா',r:'akka',h:'बड़ी बहन'},{t:'தம்பி',r:'thambi',h:'छोटा भाई'},{t:'தங்கை',r:'thangai',h:'छोटी बहन'},{t:'பாட்டி',r:'paatti',h:'नानी/दादी'},{t:'தாத்தா',r:'thaatha',h:'नाना/दादा'},{t:'மாமா',r:'maama',h:'मामा/चाचा'},{t:'அத்தை',r:'atthai',h:'मौसी/चाची'},{t:'நண்பன்',r:'nanban',h:'दोस्त (m)'},{t:'நண்பி',r:'nanbi',h:'दोस्त (f)'},{t:'கணவன்',r:'kanavan',h:'पति'},{t:'மனைவி',r:'manaivi',h:'पत्नी'},{t:'மகன்',r:'magan',h:'बेटा'},{t:'மகள்',r:'magal',h:'बेटी'}]},
-  body:{label:'Body',words:[{t:'தலை',r:'thalai',h:'सिर'},{t:'கண்',r:'kan',h:'आँख'},{t:'காது',r:'kaadhu',h:'कान'},{t:'மூக்கு',r:'mookku',h:'नाक'},{t:'வாய்',r:'vaai',h:'मुँह'},{t:'பல்',r:'pal',h:'दाँत'},{t:'கை',r:'kai',h:'हाथ'},{t:'கால்',r:'kaal',h:'पैर'},{t:'விரல்',r:'viral',h:'उँगली'},{t:'முதுகு',r:'mudugu',h:'पीठ'},{t:'வயிறு',r:'vayiru',h:'पेट'},{t:'இதயம்',r:'idhayam',h:'दिल'}]},
-  food:{label:'Food',words:[{t:'சாப்பாடு',r:'saappaadu',h:'खाना'},{t:'தண்ணீர்',r:'thanneer',h:'पानी'},{t:'பால்',r:'paal',h:'दूध'},{t:'சோறு',r:'soru',h:'चावल'},{t:'ரொட்டி',r:'rotti',h:'रोटी'},{t:'காய்கறி',r:'kaaykari',h:'सब्ज़ी'},{t:'பழம்',r:'pazham',h:'फल'},{t:'இனிப்பு',r:'inippu',h:'मिठाई'},{t:'காபி',r:'kaapi',h:'कॉफी'},{t:'தேநீர்',r:'theneer',h:'चाय'},{t:'மீன்',r:'meen',h:'मछली'},{t:'கோழி',r:'kozhi',h:'मुर्गी'},{t:'உப்பு',r:'uppu',h:'नमक'},{t:'மிளகாய்',r:'milagai',h:'मिर्च'},{t:'எண்ணெய்',r:'ennei',h:'तेल'},{t:'சர்க்கரை',r:'sarkarai',h:'चीनी'}]},
-  nature:{label:'Nature',words:[{t:'கடல்',r:'kadal',h:'समुद्र'},{t:'மலை',r:'malai',h:'पहाड़'},{t:'மரம்',r:'maram',h:'पेड़'},{t:'பூ',r:'poo',h:'फूल'},{t:'வானம்',r:'vaanam',h:'आकाश'},{t:'சூரியன்',r:'suuriyan',h:'सूरज'},{t:'நிலவு',r:'nilavu',h:'चाँद'},{t:'நட்சத்திரம்',r:'natchathiram',h:'तारा'},{t:'மழை',r:'mazhai',h:'बारिश'},{t:'காற்று',r:'kaatru',h:'हवा'},{t:'தீ',r:'thee',h:'आग'},{t:'நிலம்',r:'nilam',h:'ज़मीन'},{t:'பறவை',r:'paravai',h:'पक्षी'},{t:'விலங்கு',r:'vilangu',h:'जानवर'},{t:'மேகம்',r:'megam',h:'बादल'},{t:'நீர்',r:'neer',h:'नदी'}]},
-  home:{label:'Home',words:[{t:'வீடு',r:'veedu',h:'घर'},{t:'அறை',r:'arai',h:'कमरा'},{t:'கதவு',r:'kadhavu',h:'दरवाज़ा'},{t:'ஜன்னல்',r:'jannal',h:'खिड़की'},{t:'படுக்கை',r:'padukkai',h:'बिस्तर'},{t:'நாற்காலி',r:'naarkaali',h:'कुर्सी'},{t:'மேசை',r:'mesai',h:'मेज़'},{t:'சமையலறை',r:'samaiyalarai',h:'रसोई'},{t:'கழிப்பறை',r:'kazhipparai',h:'बाथरूम'},{t:'விளக்கு',r:'vilakku',h:'बत्ती'},{t:'புத்தகம்',r:'puthagam',h:'किताब'},{t:'கண்ணாடி',r:'kannaadi',h:'शीशा'}]},
-  travel:{label:'Travel',words:[{t:'பேருந்து',r:'perundu',h:'बस'},{t:'ரயில்',r:'rayil',h:'ट्रेन'},{t:'விமானம்',r:'vimanam',h:'हवाई जहाज़'},{t:'கார்',r:'kaar',h:'कार'},{t:'சாலை',r:'saalai',h:'सड़क'},{t:'நிலையம்',r:'nilayam',h:'स्टेशन'},{t:'வடக்கு',r:'vadakku',h:'उत्तर'},{t:'தெற்கு',r:'therku',h:'दक्षिण'},{t:'கிழக்கு',r:'kizhakku',h:'पूर्व'},{t:'மேற்கு',r:'merku',h:'पश्चिम'},{t:'வலது',r:'valadhu',h:'दाईं'},{t:'இடது',r:'idadhu',h:'बाईं'}]},
-  time:{label:'Time',words:[{t:'நேரம்',r:'neram',h:'समय'},{t:'நாள்',r:'naal',h:'दिन'},{t:'வாரம்',r:'vaaram',h:'हफ़्ता'},{t:'மாதம்',r:'maadham',h:'महीना'},{t:'வருடம்',r:'varudam',h:'साल'},{t:'இன்று',r:'indru',h:'आज'},{t:'நேற்று',r:'netru',h:'कल (बीता)'},{t:'நாளை',r:'naalai',h:'कल (आने वाला)'},{t:'காலை',r:'kaalai',h:'सुबह'},{t:'மாலை',r:'maalai',h:'शाम'},{t:'இரவு',r:'iravu',h:'रात'},{t:'நள்ளிரவு',r:'nalliiravu',h:'आधी रात'}]},
-  emotions:{label:'Feelings',words:[{t:'மகிழ்ச்சி',r:'magizchi',h:'खुशी'},{t:'சந்தோஷம்',r:'sandhosham',h:'आनंद'},{t:'துக்கம்',r:'thukkam',h:'दुख'},{t:'கோபம்',r:'kopam',h:'गुस्सा'},{t:'பயம்',r:'payam',h:'डर'},{t:'அன்பு',r:'anbu',h:'प्यार'},{t:'சோர்வு',r:'sorvu',h:'थकान'},{t:'ஆச்சர்யம்',r:'aachariyam',h:'हैरानी'},{t:'வலி',r:'vali',h:'दर्द'},{t:'நம்பிக்கை',r:'nambikkai',h:'उम्मीद'},{t:'கவலை',r:'kavalai',h:'चिंता'},{t:'சிரிப்பு',r:'sirippu',h:'हँसी'}]},
-  school:{label:'School',words:[{t:'பள்ளி',r:'palli',h:'स्कूल'},{t:'கல்லூரி',r:'kalluri',h:'कॉलेज'},{t:'ஆசிரியர்',r:'aasiriyar',h:'अध्यापक'},{t:'மாணவன்',r:'maanavan',h:'छात्र'},{t:'புத்தகம்',r:'puthagam',h:'किताब'},{t:'பேனா',r:'pena',h:'कलम'},{t:'பரீட்சை',r:'pariksha',h:'परीक्षा'},{t:'கணிதம்',r:'kanitham',h:'गणित'},{t:'அறிவியல்',r:'arivial',h:'विज्ञान'},{t:'வரலாறு',r:'varalaru',h:'इतिहास'},{t:'மொழி',r:'mozhi',h:'भाषा'},{t:'பலகை',r:'palakai',h:'ब्लैकबोर्ड'}]},
-  adjectives:{label:'Describing',words:[{t:'நல்ல',r:'nalla',h:'अच्छा'},{t:'கெட்ட',r:'ketta',h:'बुरा'},{t:'பெரிய',r:'periya',h:'बड़ा'},{t:'சின்ன',r:'sinna',h:'छोटा'},{t:'அழகான',r:'azhagaana',h:'सुंदर'},{t:'வேகமான',r:'vegamaana',h:'तेज़'},{t:'மெதுவான',r:'methuvaana',h:'धीरे'},{t:'புதிய',r:'puthiya',h:'नया'},{t:'பழைய',r:'pazhaiya',h:'पुराना'},{t:'சூடான',r:'soodaana',h:'गरम'},{t:'குளிர்ந்த',r:'kulirndha',h:'ठंडा'},{t:'கஷ்டமான',r:'kashtamaana',h:'मुश्किल'},{t:'எளிதான',r:'elidhana',h:'आसान'},{t:'நீண்ட',r:'neenda',h:'लंबा'},{t:'கனமான',r:'kanamaana',h:'भारी'},{t:'இலேசான',r:'ilesana',h:'हल्का'}]},
+  family:{label:'Family',words:[
+    {t:'அம்மா',r:'amma',h:'माँ'},
+    {t:'அப்பா',r:'appa',h:'पिताजी'},
+    {t:'அண்ணன்',r:'annan',h:'बड़ा भाई',s:'அண்ணா',sr:'anna',sh:'बड़ा भाई (address term — अण्णा बोलते हैं)'},
+    {t:'அக்கா',r:'akka',h:'बड़ी बहन'},
+    {t:'தம்பி',r:'thambi',h:'छोटा भाई'},
+    {t:'தங்கை',r:'thangai',h:'छोटी बहन'},
+    {t:'பாட்டி',r:'paatti',h:'नानी/दादी'},
+    {t:'தாத்தா',r:'thaatha',h:'नाना/दादा'},
+    {t:'மாமா',r:'maama',h:'मामा/चाचा'},
+    {t:'அத்தை',r:'atthai',h:'मौसी/चाची'},
+    {t:'நண்பன்',r:'nanban',h:'दोस्त (m)',s:'மச்சான்',sr:'macchaan',sh:'यार / दोस्त (m) — Chennai slang'},
+    {t:'நண்பி',r:'nanbi',h:'दोस्त (f)'},
+    {t:'கணவன்',r:'kanavan',h:'पति',s:'ரொம்ப நல்லவன்',sr:'romba nallavan',sh:'बहुत अच्छा है (affectionate, colloquial)'},
+    {t:'மனைவி',r:'manaivi',h:'पत्नी'},
+    {t:'மகன்',r:'magan',h:'बेटा'},
+    {t:'மகள்',r:'magal',h:'बेटी'}
+  ]},
+  body:{label:'Body',words:[
+    {t:'தலை',r:'thalai',h:'सिर'},
+    {t:'கண்',r:'kan',h:'आँख'},
+    {t:'காது',r:'kaadhu',h:'कान'},
+    {t:'மூக்கு',r:'mookku',h:'नाक'},
+    {t:'வாய்',r:'vaai',h:'मुँह'},
+    {t:'பல்',r:'pal',h:'दाँत'},
+    {t:'கை',r:'kai',h:'हाथ'},
+    {t:'கால்',r:'kaal',h:'पैर'},
+    {t:'விரல்',r:'viral',h:'उँगली'},
+    {t:'முதுகு',r:'mudugu',h:'पीठ'},
+    {t:'வயிறு',r:'vayiru',h:'पेट',s:'வயித்து',sr:'vayittu',sh:'पेट (spoken form — वयित्तु)'},
+    {t:'இதயம்',r:'idhayam',h:'दिल',s:'மனசு',sr:'manasu',sh:'दिल / मन (बोलचाल में मनसु)'}
+  ]},
+  food:{label:'Food',words:[
+    {t:'சாப்பாடு',r:'saappaadu',h:'खाना',s:'சாப்பிட',sr:'saappida',sh:'खाना (verb form used casually — "साप्पिड போलாம்?" = खाने चलें?)'},
+    {t:'தண்ணீர்',r:'thanneer',h:'पानी',s:'தண்ணி',sr:'thanni',sh:'पानी (बोलचाल — थन्नी)'},
+    {t:'பால்',r:'paal',h:'दूध'},
+    {t:'சோறு',r:'soru',h:'चावल'},
+    {t:'ரொட்டி',r:'rotti',h:'रोटी'},
+    {t:'காய்கறி',r:'kaaykari',h:'सब्ज़ी'},
+    {t:'பழம்',r:'pazham',h:'फल'},
+    {t:'இனிப்பு',r:'inippu',h:'मिठाई'},
+    {t:'காபி',r:'kaapi',h:'कॉफी'},
+    {t:'தேநீர்',r:'theneer',h:'चाय',s:'டீ',sr:'tee',sh:'चाय (बोलचाल — "टी குடिக்கணும்" = चाय पीनी है)'},
+    {t:'மீன்',r:'meen',h:'मछली'},
+    {t:'கோழி',r:'kozhi',h:'मुर्गी'},
+    {t:'உப்பு',r:'uppu',h:'नमक'},
+    {t:'மிளகாய்',r:'milagai',h:'मिर्च'},
+    {t:'எண்ணெய்',r:'ennei',h:'तेल'},
+    {t:'சர்க்கரை',r:'sarkarai',h:'चीनी',s:'சக்கரை',sr:'sakkarai',sh:'चीनी (बोलचाल उच्चारण)'}
+  ]},
+  nature:{label:'Nature',words:[
+    {t:'கடல்',r:'kadal',h:'समुद्र'},
+    {t:'மலை',r:'malai',h:'पहाड़'},
+    {t:'மரம்',r:'maram',h:'पेड़'},
+    {t:'பூ',r:'poo',h:'फूल'},
+    {t:'வானம்',r:'vaanam',h:'आकाश'},
+    {t:'சூரியன்',r:'suuriyan',h:'सूरज',s:'சூரியன்',sr:'suriyan',sh:'सूरज (बोलचाल उच्चारण — सुरियन)'},
+    {t:'நிலவு',r:'nilavu',h:'चाँद'},
+    {t:'நட்சத்திரம்',r:'natchathiram',h:'तारा'},
+    {t:'மழை',r:'mazhai',h:'बारिश'},
+    {t:'காற்று',r:'kaatru',h:'हवा',s:'காத்து',sr:'kaathu',sh:'हवा (बोलचाल — काथु)'},
+    {t:'தீ',r:'thee',h:'आग'},
+    {t:'நிலம்',r:'nilam',h:'ज़मीन'},
+    {t:'பறவை',r:'paravai',h:'पक्षी'},
+    {t:'விலங்கு',r:'vilangu',h:'जानवर'},
+    {t:'மேகம்',r:'megam',h:'बादल'},
+    {t:'நீர்',r:'neer',h:'नदी'}
+  ]},
+  home:{label:'Home',words:[
+    {t:'வீடு',r:'veedu',h:'घर'},
+    {t:'அறை',r:'arai',h:'कमरा'},
+    {t:'கதவு',r:'kadhavu',h:'दरवाज़ा',s:'கதவு',sr:'kadhavu',sh:'दरवाज़ा (same in spoken)'},
+    {t:'ஜன்னல்',r:'jannal',h:'खिड़की'},
+    {t:'படுக்கை',r:'padukkai',h:'बिस्तर'},
+    {t:'நாற்காலி',r:'naarkaali',h:'कुर्सी',s:'சேர்',sr:'chair',sh:'कुर्सी (बोलचाल में अंग्रेज़ी — चेयर)'},
+    {t:'மேசை',r:'mesai',h:'मेज़',s:'டேபிள்',sr:'table',sh:'मेज़ (बोलचाल में अंग्रेज़ी — टेबल)'},
+    {t:'சமையலறை',r:'samaiyalarai',h:'रसोई',s:'கிச்சன்',sr:'kitchen',sh:'रसोई (बोलचाल में किचन)'},
+    {t:'கழிப்பறை',r:'kazhipparai',h:'बाथरूम',s:'பாத்ரூம்',sr:'bathroom',sh:'बाथरूम (बोलचाल में bathroom)'},
+    {t:'விளக்கு',r:'vilakku',h:'बत्ती',s:'லைட்',sr:'light',sh:'बत्ती (बोलचाल में लाइट)'},
+    {t:'புத்தகம்',r:'puthagam',h:'किताब'},
+    {t:'கண்ணாடி',r:'kannaadi',h:'शीशा'}
+  ]},
+  travel:{label:'Travel',words:[
+    {t:'பேருந்து',r:'perundu',h:'बस',s:'பஸ்',sr:'bus',sh:'बस (बोलचाल में बस)'},
+    {t:'ரயில்',r:'rayil',h:'ट्रेन',s:'ட்ரெயின்',sr:'train',sh:'ट्रेन (बोलचाल में ट्रेन)'},
+    {t:'விமானம்',r:'vimanam',h:'हवाई जहाज़',s:'பிளேன்',sr:'plane',sh:'हवाई जहाज़ (बोलचाल में प्लेन)'},
+    {t:'கார்',r:'kaar',h:'कार'},
+    {t:'சாலை',r:'saalai',h:'सड़क',s:'ரோடு',sr:'road',sh:'सड़क (बोलचाल में रोड)'},
+    {t:'நிலையம்',r:'nilayam',h:'स्टेशन',s:'ஸ்டேஷன்',sr:'station',sh:'स्टेशन (बोलचाल)'},
+    {t:'வடக்கு',r:'vadakku',h:'उत्तर'},
+    {t:'தெற்கு',r:'therku',h:'दक्षिण'},
+    {t:'கிழக்கு',r:'kizhakku',h:'पूर्व'},
+    {t:'மேற்கு',r:'merku',h:'पश्चिम'},
+    {t:'வலது',r:'valadhu',h:'दाईं',s:'ரைட்',sr:'right',sh:'दाईं (बोलचाल में राइट)'},
+    {t:'இடது',r:'idadhu',h:'बाईं',s:'லெப்ட்',sr:'left',sh:'बाईं (बोलचाल में लेफ्ट)'}
+  ]},
+  time:{label:'Time',words:[
+    {t:'நேரம்',r:'neram',h:'समय'},
+    {t:'நாள்',r:'naal',h:'दिन'},
+    {t:'வாரம்',r:'vaaram',h:'हफ़्ता'},
+    {t:'மாதம்',r:'maadham',h:'महीना'},
+    {t:'வருடம்',r:'varudam',h:'साल'},
+    {t:'இன்று',r:'indru',h:'आज',s:'இன்னிக்கு',sr:'innikku',sh:'आज (बोलचाल — इन्निक्कु)'},
+    {t:'நேற்று',r:'netru',h:'कल (बीता)',s:'நேத்து',sr:'nethu',sh:'कल (बोलचाल — नेत्थु)'},
+    {t:'நாளை',r:'naalai',h:'कल (आने वाला)',s:'நாளைக்கு',sr:'naalaikku',sh:'कल (बोलचाल — नालैक्कु)'},
+    {t:'காலை',r:'kaalai',h:'सुबह'},
+    {t:'மாலை',r:'maalai',h:'शाम'},
+    {t:'இரவு',r:'iravu',h:'रात'},
+    {t:'நள்ளிரவு',r:'nalliiravu',h:'आधी रात'}
+  ]},
+  emotions:{label:'Feelings',words:[
+    {t:'மகிழ்ச்சி',r:'magizchi',h:'खुशी',s:'சந்தோஷம்',sr:'sandhosham',sh:'खुशी (बोलचाल — सन्तोषम् ज़्यादा use होता है)'},
+    {t:'சந்தோஷம்',r:'sandhosham',h:'आनंद'},
+    {t:'துக்கம்',r:'thukkam',h:'दुख'},
+    {t:'கோபம்',r:'kopam',h:'गुस्सा'},
+    {t:'பயம்',r:'payam',h:'डर'},
+    {t:'அன்பு',r:'anbu',h:'प्यार'},
+    {t:'சோர்வு',r:'sorvu',h:'थकान',s:'டயர்ட்',sr:'tired',sh:'थकान (बोलचाल में टायर्ड)'},
+    {t:'ஆச்சர்யம்',r:'aachariyam',h:'हैरानी',s:'ஆமாஞ்சே',sr:'aamaanje',sh:'वाकई! / सच में! (Chennai surprise expression)'},
+    {t:'வலி',r:'vali',h:'दर्द'},
+    {t:'நம்பிக்கை',r:'nambikkai',h:'उम्मीद'},
+    {t:'கவலை',r:'kavalai',h:'चिंता',s:'டென்ஷன்',sr:'tension',sh:'चिंता (बोलचाल में टेन्शन)'},
+    {t:'சிரிப்பு',r:'sirippu',h:'हँसी'}
+  ]},
+  school:{label:'School',words:[
+    {t:'பள்ளி',r:'palli',h:'स्कूल',s:'ஸ்கூல்',sr:'school',sh:'स्कूल (बोलचाल में स्कूल)'},
+    {t:'கல்லூரி',r:'kalluri',h:'कॉलेज',s:'காலேஜ்',sr:'college',sh:'कॉलेज (बोलचाल में कालेज)'},
+    {t:'ஆசிரியர்',r:'aasiriyar',h:'अध्यापक',s:'டீச்சர்',sr:'teacher',sh:'अध्यापक (बोलचाल में टीचर)'},
+    {t:'மாணவன்',r:'maanavan',h:'छात्र'},
+    {t:'புத்தகம்',r:'puthagam',h:'किताब'},
+    {t:'பேனா',r:'pena',h:'कलम',s:'பேன்',sr:'pen',sh:'कलम (बोलचाल में पेन)'},
+    {t:'பரீட்சை',r:'pariksha',h:'परीक्षा',s:'எக்ஸாம்',sr:'exam',sh:'परीक्षा (बोलचाल में एग्ज़ाम)'},
+    {t:'கணிதம்',r:'kanitham',h:'गणित',s:'மேத்ஸ்',sr:'maths',sh:'गणित (बोलचाल में मैथ्स)'},
+    {t:'அறிவியல்',r:'arivial',h:'विज्ञान',s:'சயின்ஸ்',sr:'science',sh:'विज्ञान (बोलचाल में साइंस)'},
+    {t:'வரலாறு',r:'varalaru',h:'इतिहास',s:'ஹிஸ்டரி',sr:'history',sh:'इतिहास (बोलचाल में हिस्ट्री)'},
+    {t:'மொழி',r:'mozhi',h:'भाषा'},
+    {t:'பலகை',r:'palakai',h:'ब्लैकबोर्ड',s:'போர்டு',sr:'board',sh:'ब्लैकबोर्ड (बोलचाल में बोर्ड)'}
+  ]},
+  adjectives:{label:'Describing',words:[
+    {t:'நல்ல',r:'nalla',h:'अच्छा'},
+    {t:'கெட்ட',r:'ketta',h:'बुरा'},
+    {t:'பெரிய',r:'periya',h:'बड़ा'},
+    {t:'சின்ன',r:'sinna',h:'छोटा'},
+    {t:'அழகான',r:'azhagaana',h:'सुंदर',s:'சூப்பர்',sr:'super',sh:'बढ़िया / सुंदर (Chennai — सुपर है!)'},
+    {t:'வேகமான',r:'vegamaana',h:'तेज़'},
+    {t:'மெதுவான',r:'methuvaana',h:'धीरे'},
+    {t:'புதிய',r:'puthiya',h:'नया'},
+    {t:'பழைய',r:'pazhaiya',h:'पुराना'},
+    {t:'சூடான',r:'soodaana',h:'गरम',s:'சூட்டு சூட்டா',sr:'soottu sootta',sh:'बहुत गरम (बोलचाल — दोहराकर emphasis)'},
+    {t:'குளிர்ந்த',r:'kulirndha',h:'ठंडा',s:'குளுகுளு',sr:'kulukulu',sh:'ठंडा ठंडा (बोलचाल — कुलुकुलु)'},
+    {t:'கஷ்டமான',r:'kashtamaana',h:'मुश्किल'},
+    {t:'எளிதான',r:'elidhana',h:'आसान',s:'ஈஸி',sr:'easy',sh:'आसान (बोलचाल में ईज़ी)'},
+    {t:'நீண்ட',r:'neenda',h:'लंबा'},
+    {t:'கனமான',r:'kanamaana',h:'भारी'},
+    {t:'இலேசான',r:'ilesana',h:'हल्का'}
+  ]},
   calendar:{label:'🗓️ Calendar',words:[
     {t:'திங்கட்கிழமை',r:'thingatkizhame',h:'सोमवार'},
     {t:'செவ்வாய்கிழமை',r:'sevvaaikizhamai',h:'मंगलवार'},
@@ -1255,13 +1431,159 @@ const largeNums=[
 ];
 
 const sentenceCategories={
-  greetings:{label:'Greetings',sents:[{t:'வணக்கம்',r:'vanakkam',h:'नमस्ते',lv:'basic'},{t:'காலை வணக்கம்',r:'kaalai vanakkam',h:'सुप्रभात',lv:'basic'},{t:'மாலை வணக்கம்',r:'maalai vanakkam',h:'शुभ शाम',lv:'basic'},{t:'இரவு வணக்கம்',r:'iravu vanakkam',h:'शुभ रात्रि',lv:'basic'},{t:'நலமா?',r:'nalama?',h:'कैसे हो?',lv:'basic'},{t:'நலம், நன்றி',r:'nalam nandri',h:'ठीक हूँ, धन्यवाद',lv:'basic'},{t:'மிக்க நன்றி',r:'mikka nandri',h:'बहुत धन्यवाद',lv:'basic'},{t:'சரி',r:'sari',h:'ठीक है',lv:'basic'},{t:'பரவாயில்லை',r:'paravaayillai',h:'कोई बात नहीं',lv:'basic'},{t:'மன்னிக்கவும்',r:'mannikkavum',h:'माफ़ कीजिए',lv:'basic'},{t:'மீண்டும் சந்திப்போம்',r:'meendum sandhippom',h:'फिर मिलेंगे',lv:'intermediate'},{t:'உங்களை சந்தித்தது மகிழ்ச்சி',r:'ungalai sandhithadhu magizhchi',h:'आपसे मिलकर खुशी हुई',lv:'intermediate'}]},
-  intro:{label:'Intro',sents:[{t:'என் பெயர் ___',r:'en peyar ___',h:'मेरा नाम ___ है',lv:'basic'},{t:'உங்கள் பெயர் என்ன?',r:'ungal peyar enna?',h:'आपका नाम क्या है?',lv:'basic'},{t:'என்னோட வயது இருபது',r:'ennoda vayadhu irupadu',h:'मेरी उम्र बीस है',lv:'basic'},{t:'நான் இந்தியாவில் இருக்கிறேன்',r:'naan indiyaavil irukkiren',h:'मैं भारत में रहता हूँ',lv:'intermediate'},{t:'நான் தமிழ் படிக்கிறேன்',r:'naan tamil padikkiren',h:'मैं तमिल पढ़ता हूँ',lv:'intermediate'},{t:'என்னோட தொழில் ஆசிரியர்',r:'ennoda thozhil aasiriyar',h:'मेरा पेशा शिक्षक है',lv:'intermediate'},{t:'நான் சென்னையில் பிறந்தேன்',r:'naan chennaiyil pirandheen',h:'मेरा जन्म चेन्नई में हुआ',lv:'advanced'},{t:'என் வீடு சென்னையில் உள்ளது',r:'en veedu chennaiyil ulladu',h:'मेरा घर चेन्नई में है',lv:'intermediate'}]},
-  daily:{label:'Daily life',sents:[{t:'இது என்ன?',r:'idhu enna?',h:'यह क्या है?',lv:'basic'},{t:'இங்கே வா',r:'inge vaa',h:'यहाँ आओ',lv:'basic'},{t:'அங்கே போ',r:'ange po',h:'वहाँ जाओ',lv:'basic'},{t:'எனக்கு புரியவில்லை',r:'enakku puriyavillai',h:'मुझे समझ नहीं आया',lv:'basic'},{t:'கொஞ்சம் மெதுவா பேசுங்க',r:'konjam methuvaa pesungga',h:'थोड़ा धीरे बोलिए',lv:'basic'},{t:'மீண்டும் சொல்லுங்க',r:'meendum sollungga',h:'फिर से बोलिए',lv:'basic'},{t:'பசிக்கிறது',r:'pasikkiradhu',h:'भूख लग रही है',lv:'basic'},{t:'தாகமாக இருக்கிறது',r:'thaagamaaga irukkirdhu',h:'प्यास लग रही है',lv:'basic'},{t:'எங்கே போகிறீர்கள்?',r:'enge pogireergal?',h:'आप कहाँ जा रहे हैं?',lv:'intermediate'},{t:'கடை எங்கே இருக்கிறது?',r:'kadai enge irukkirdhu?',h:'दुकान कहाँ है?',lv:'intermediate'},{t:'இது எவ்வளவு?',r:'idhu evvalavu?',h:'यह कितने का है?',lv:'intermediate'},{t:'வலது பக்கம் திரும்பு',r:'valadhu pakkam thirumbu',h:'दाईं तरफ मुड़ो',lv:'intermediate'},{t:'இடது பக்கம் திரும்பு',r:'idadhu pakkam thirumbu',h:'बाईं तरफ मुड़ो',lv:'intermediate'},{t:'டாக்டரை அழைக்கவும்',r:'daaktarai azhaikkavum',h:'डॉक्टर को बुलाइए',lv:'intermediate'},{t:'கொஞ்சம் பொறுங்க',r:'konjam porunga',h:'थोड़ा रुकिए',lv:'basic'},{t:'சீக்கிரம் வாருங்க',r:'seekkiaram vaarunga',h:'जल्दी आइए',lv:'intermediate'}]},
-  shopping:{label:'Shopping',sents:[{t:'இது எவ்வளவு?',r:'idhu evvalavu?',h:'यह कितने का है?',lv:'basic'},{t:'கொஞ்சம் குறைக்க முடியுமா?',r:'konjam kuraika mudiyuma?',h:'थोड़ा कम होगा क्या?',lv:'intermediate'},{t:'வேற நிறம் இருக்கா?',r:'vera niram irukka?',h:'दूसरा रंग है क्या?',lv:'intermediate'},{t:'பெரிய size இருக்கா?',r:'periya size irukka?',h:'बड़ा size है क्या?',lv:'intermediate'},{t:'இது நல்லா இருக்கு',r:'idhu nalla irukku',h:'यह अच्छा है',lv:'basic'},{t:'வேண்டாம், நன்றி',r:'vendum, nandri',h:'नहीं चाहिए, धन्यवाद',lv:'basic'},{t:'ரசீது கொடுங்க',r:'raseedhu kodunga',h:'रसीद दीजिए',lv:'intermediate'},{t:'Cash or card?',r:'cash illa card?',h:'कैश या कार्ड?',lv:'basic'}]},
-  feelings:{label:'Feelings',sents:[{t:'எனக்கு மகிழ்ச்சியாக இருக்கிறது',r:'enakku magizhchiyaaga irukkirdhu',h:'मुझे खुशी हो रही है',lv:'intermediate'},{t:'எனக்கு வலிக்கிறது',r:'enakku valikkiradhu',h:'मुझे दर्द हो रहा है',lv:'basic'},{t:'எனக்கு காய்ச்சல்',r:'enakku kaaycchal',h:'मुझे बुखार है',lv:'basic'},{t:'நான் சோர்வாக இருக்கிறேன்',r:'naan sorvaa irukkiren',h:'मैं थका हुआ हूँ',lv:'intermediate'},{t:'இது மிகவும் அருமை',r:'idhu migavum arumai',h:'यह बहुत शानदार है',lv:'basic'},{t:'எனக்கு இது பிடிக்கவில்லை',r:'enakku idhu pidikkavilla',h:'मुझे यह पसंद नहीं',lv:'intermediate'},{t:'எனக்கு தமிழ் சினிமா பிடிக்கும்',r:'enakku tamil cinema pidikkum',h:'मुझे तमिल सिनेमा पसंद है',lv:'intermediate'},{t:'நான் மிகவும் கோபமாக இருக்கிறேன்',r:'naan migavum kopamaga irukkiren',h:'मैं बहुत गुस्से में हूँ',lv:'intermediate'},{t:'கவலைப்படாதே',r:'kavalaippadade',h:'चिंता मत करो',lv:'basic'}]},
-  food:{label:'Food & Dining',sents:[{t:'சாப்பிட போகலாம்',r:'saappida pogalaam',h:'खाना खाने चलते हैं',lv:'basic'},{t:'என்ன சாப்பிட விரும்புகிறீர்கள்?',r:'enna saappida virumbugireergal?',h:'आप क्या खाना चाहते हैं?',lv:'intermediate'},{t:'இந்த உணவு மிகவும் சுவையாக உள்ளது',r:'indha unavu migavum suvaiyaaga ulladu',h:'यह खाना बहुत स्वादिष्ट है',lv:'advanced'},{t:'தண்ணீர் கொடுங்க',r:'thanneer kodunga',h:'पानी दीजिए',lv:'basic'},{t:'மசாலா குறைவாக போடுங்க',r:'masala kuraivaa podunga',h:'मसाला कम डालिए',lv:'intermediate'},{t:'சாப்பாடு ஆச்சா?',r:'saappaadu aacha?',h:'खाना तैयार हो गया?',lv:'basic'},{t:'கொஞ்சம் கூட சாப்பிடு',r:'konjam kooda saappidu',h:'थोड़ा और खा',lv:'basic'},{t:'பில் கொண்டாருங்க',r:'bill kondaarunga',h:'बिल लाइए',lv:'intermediate'}]},
-  advanced:{label:'Advanced',sents:[{t:'நான் தமிழ் கற்றுக்கொண்டிருக்கிறேன்',r:'naan tamil katrukondirukkiren',h:'मैं तमिल सीख रहा हूँ',lv:'advanced'},{t:'தமிழ் மிகவும் அழகான மொழி',r:'tamil migavum azhagaana mozhi',h:'तमिल बहुत सुंदर भाषा है',lv:'advanced'},{t:'நாளை நான் சென்னை போவேன்',r:'naalai naan chennai poven',h:'कल मैं चेन्नई जाऊंगा',lv:'advanced'},{t:'அவள் நேற்று பள்ளிக்கு போனாள்',r:'aval netru palliku ponaal',h:'वो कल स्कूल गई',lv:'advanced'},{t:'உங்களுக்கு தமிழ் தெரியுமா?',r:'ungalukku tamil theriyuma?',h:'क्या आपको तमिल आती है?',lv:'advanced'},{t:'என்னால் தமிழ் கொஞ்சம் பேச முடியும்',r:'ennaal tamil konjam peesa mudiyum',h:'मैं थोड़ी तमिल बोल सकता हूँ',lv:'advanced'},{t:'நீங்கள் என்ன சாப்பிட விரும்புகிறீர்கள்?',r:'neengal enna saappida virumbugireergal?',h:'आप क्या खाना चाहते हैं?',lv:'advanced'},{t:'இந்த வாரம் மிகவும் கஷ்டமாக இருந்தது',r:'indha vaaram migavum kashtamaaga irundhadu',h:'यह हफ्ता बहुत मुश्किल था',lv:'advanced'},{t:'நான் ஒரு புத்தகம் படிக்க விரும்புகிறேன்',r:'naan oru puthagam padikka virumbugiren',h:'मैं एक किताब पढ़ना चाहता हूँ',lv:'advanced'},{t:'இது எனக்கு தெரியாது',r:'idhu enakku theriyaadhu',h:'यह मुझे नहीं पता',lv:'intermediate'}]}
+  greetings:{label:'Greetings',sents:[
+    {t:'வணக்கம்',r:'vanakkam',h:'नमस्ते',lv:'basic',
+     s:'என்ன, எப்படி இருக்க?',sr:'enna, eppadi irukka?',sh:'अरे, कैसे हो? (casual Chennai greeting)'},
+    {t:'காலை வணக்கம்',r:'kaalai vanakkam',h:'सुप्रभात',lv:'basic',
+     s:'காலையில சாப்பிட்டியா?',sr:'kaalaila saappittiya?',sh:'सुबह खाया? (असली सुबह का अभिवादन)'},
+    {t:'மாலை வணக்கம்',r:'maalai vanakkam',h:'शुभ शाम',lv:'basic'},
+    {t:'இரவு வணக்கம்',r:'iravu vanakkam',h:'शुभ रात्रि',lv:'basic',
+     s:'தூக்கம் வருதா?',sr:'thookkam varudha?',sh:'नींद आ रही है? (रात की बातचीत)'},
+    {t:'நலமா?',r:'nalama?',h:'कैसे हो?',lv:'basic',
+     s:'எப்படி இருக்க?',sr:'eppadi irukka?',sh:'कैसे हो? (रोज़मर्रा की बोलचाल)'},
+    {t:'நலம், நன்றி',r:'nalam nandri',h:'ठीक हूँ, धन्यवाद',lv:'basic',
+     s:'நல்லா இருக்கேன், நீ?',sr:'nalla irukken, nee?',sh:'ठीक हूँ, तू? (casual reply)'},
+    {t:'மிக்க நன்றி',r:'mikka nandri',h:'बहुत धन्यवाद',lv:'basic',
+     s:'தேங்க்ஸ் டா',sr:'thanks da',sh:'बहुत धन्यवाद (दोस्तों के बीच)'},
+    {t:'சரி',r:'sari',h:'ठीक है',lv:'basic',
+     s:'சரியா',sr:'sariya',sh:'ठीक है (बोलचाल — सरिया)'},
+    {t:'பரவாயில்லை',r:'paravaayillai',h:'कोई बात नहीं',lv:'basic',
+     s:'பரவாயில்ல',sr:'paravaayilla',sh:'कोई बात नहीं (dropped ending — पर्वैल्ल)'},
+    {t:'மன்னிக்கவும்',r:'mannikkavum',h:'माफ़ कीजिए',lv:'basic',
+     s:'சாரி டா',sr:'sorry da',sh:'माफ करो यार (दोस्तों के बीच)'},
+    {t:'மீண்டும் சந்திப்போம்',r:'meendum sandhippom',h:'फिर मिलेंगे',lv:'intermediate',
+     s:'பாக்கலாம்',sr:'paaklaam',sh:'मिलते हैं (casual — पाक्कलाम)'},
+    {t:'உங்களை சந்தித்தது மகிழ்ச்சி',r:'ungalai sandhithadhu magizhchi',h:'आपसे मिलकर खुशी हुई',lv:'intermediate',
+     s:'நீ கிட்ட பேசி சந்தோஷம்',sr:'nee kitta peesi sandhosham',sh:'तुमसे मिलकर अच्छा लगा (casual)'}
+  ]},
+  intro:{label:'Intro',sents:[
+    {t:'என் பெயர் ___',r:'en peyar ___',h:'मेरा नाम ___ है',lv:'basic',
+     s:'என்னோட பேரு ___',sr:'ennoda peru ___',sh:'मेरा नाम ___ है (spoken — एन्नोड पेरु)'},
+    {t:'உங்கள் பெயர் என்ன?',r:'ungal peyar enna?',h:'आपका नाम क्या है?',lv:'basic',
+     s:'உன் பேரு என்ன?',sr:'un peru enna?',sh:'तुम्हारा नाम क्या है? (casual)'},
+    {t:'என்னோட வயது இருபது',r:'ennoda vayadhu irupadu',h:'मेरी उम्र बीस है',lv:'basic',
+     s:'என்னோட வயசு இருபது',sr:'ennoda vayasu irupadu',sh:'मेरी उम्र बीस है (वयसु — spoken form)'},
+    {t:'நான் இந்தியாவில் இருக்கிறேன்',r:'naan indiyaavil irukkiren',h:'मैं भारत में रहता हूँ',lv:'intermediate',
+     s:'நான் இந்தியால இருக்கேன்',sr:'naan indiyaala irukken',h:'मैं भारत में हूँ (dropped ending, spoken)'},
+    {t:'நான் தமிழ் படிக்கிறேன்',r:'naan tamil padikkiren',h:'मैं तमिल पढ़ता हूँ',lv:'intermediate',
+     s:'நான் தமிழ் படிக்குறேன்',sr:'naan tamil padikkuren',sh:'मैं तमिल पढ़ रहा हूँ (spoken — पदिक्कुरेन)'},
+    {t:'என்னோட தொழில் ஆசிரியர்',r:'ennoda thozhil aasiriyar',h:'मेरा पेशा शिक्षक है',lv:'intermediate',
+     s:'நான் டீச்சர்',sr:'naan teacher',sh:'मैं टीचर हूँ (casual)'},
+    {t:'நான் சென்னையில் பிறந்தேன்',r:'naan chennaiyil pirandheen',h:'मेरा जन्म चेन्नई में हुआ',lv:'advanced',
+     s:'நான் Chennai-ல பொறந்தேன்',sr:'naan Chennai-la porandhen',sh:'मैं चेन्नई में पैदा हुआ (spoken — पोरन्देन)'},
+    {t:'என் வீடு சென்னையில் உள்ளது',r:'en veedu chennaiyil ulladu',h:'मेरा घर चेन्नई में है',lv:'intermediate',
+     s:'என்னோட வீடு Chennai-ல இருக்கு',sr:'ennoda veedu Chennai-la irukku',sh:'मेरा घर चेन्नई में है (spoken)'}
+  ]},
+  daily:{label:'Daily life',sents:[
+    {t:'இது என்ன?',r:'idhu enna?',h:'यह क्या है?',lv:'basic',
+     s:'இது என்னா?',sr:'idhu enna?',sh:'यह क्या है? (same, naturally spoken)'},
+    {t:'இங்கே வா',r:'inge vaa',h:'यहाँ आओ',lv:'basic',
+     s:'இங்க வா',sr:'inga vaa',sh:'यहाँ आ (इंग — dropped ending)'},
+    {t:'அங்கே போ',r:'ange po',h:'वहाँ जाओ',lv:'basic',
+     s:'அங்க போ',sr:'anga po',sh:'वहाँ जा (अंग — spoken)'},
+    {t:'எனக்கு புரியவில்லை',r:'enakku puriyavillai',h:'मुझे समझ नहीं आया',lv:'basic',
+     s:'எனக்கு புரியல',sr:'enakku puriyala',sh:'मुझे समझ नहीं आया (spoken — पुरियल)'},
+    {t:'கொஞ்சம் மெதுவா பேசுங்க',r:'konjam methuvaa pesungga',h:'थोड़ा धीरे बोलिए',lv:'basic',
+     s:'கொஞ்சம் மெதுவா பேசு',sr:'konjam methuvaa pesu',sh:'थोड़ा धीरे बोल (informal — without -ங்க)'},
+    {t:'மீண்டும் சொல்லுங்க',r:'meendum sollungga',h:'फिर से बोलिए',lv:'basic',
+     s:'இன்னொரு தடவை சொல்லு',sr:'innoru thadavai sollu',sh:'एक बार और बोलो (casual)'},
+    {t:'பசிக்கிறது',r:'pasikkiradhu',h:'भूख लग रही है',lv:'basic',
+     s:'பசிக்குது',sr:'pasikkudhu',sh:'भूख लग रही है (spoken — पसिक्कुधु)'},
+    {t:'தாகமாக இருக்கிறது',r:'thaagamaaga irukkirdhu',h:'प्यास लग रही है',lv:'basic',
+     s:'தண்ணி வேணும்',sr:'thanni venum',sh:'पानी चाहिए (direct spoken — थन्नि वेणुम)'},
+    {t:'எங்கே போகிறீர்கள்?',r:'enge pogireergal?',h:'आप कहाँ जा रहे हैं?',lv:'intermediate',
+     s:'எங்க போற?',sr:'enga pora?',sh:'कहाँ जा रहे हो? (casual — एंग पोर?)'},
+    {t:'கடை எங்கே இருக்கிறது?',r:'kadai enge irukkirdhu?',h:'दुकान कहाँ है?',lv:'intermediate',
+     s:'கடை எங்க இருக்கு?',sr:'kadai enga irukku?',sh:'दुकान कहाँ है? (spoken)'},
+    {t:'இது எவ்வளவு?',r:'idhu evvalavu?',h:'यह कितने का है?',lv:'intermediate',
+     s:'இது எவ்ளோ?',sr:'idhu evlo?',sh:'यह कितने का? (spoken — एव्लो?)'},
+    {t:'வலது பக்கம் திரும்பு',r:'valadhu pakkam thirumbu',h:'दाईं तरफ मुड़ो',lv:'intermediate',
+     s:'ரைட்ல திரும்பு',sr:'right-la thirumbu',sh:'दाईं तरफ मुड़ो (spoken — राइटल)'},
+    {t:'இடது பக்கம் திரும்பு',r:'idadhu pakkam thirumbu',h:'बाईं तरफ मुड़ो',lv:'intermediate',
+     s:'லெப்ட்ல திரும்பு',sr:'left-la thirumbu',sh:'बाईं तरफ मुड़ो (spoken — लेफ्टल)'},
+    {t:'டாக்டரை அழைக்கவும்',r:'daaktarai azhaikkavum',h:'डॉक्टर को बुलाइए',lv:'intermediate',
+     s:'டாக்டரை கூப்பிடு',sr:'daaktarai koopidu',sh:'डॉक्टर को बुलाओ (spoken — कूपिडु)'},
+    {t:'கொஞ்சம் பொறுங்க',r:'konjam porunga',h:'थोड़ा रुकिए',lv:'basic',
+     s:'கொஞ்சம் wait பண்ணு',sr:'konjam wait pannu',sh:'थोड़ा रुको (spoken — वेट पण्णु)'},
+    {t:'சீக்கிரம் வாருங்க',r:'seekkiaram vaarunga',h:'जल्दी आइए',lv:'intermediate',
+     s:'சீக்கிரம் வா',sr:'seekkiram vaa',sh:'जल्दी आ (informal)'}
+  ]},
+  shopping:{label:'Shopping',sents:[
+    {t:'இது எவ்வளவு?',r:'idhu evvalavu?',h:'यह कितने का है?',lv:'basic',
+     s:'இது எவ்ளோ?',sr:'idhu evlo?',sh:'यह कितने का? (spoken shortening)'},
+    {t:'கொஞ்சம் குறைக்க முடியுமா?',r:'konjam kuraika mudiyuma?',h:'थोड़ा कम होगा क्या?',lv:'intermediate',
+     s:'கொஞ்சம் கம்மி பண்ண முடியுமா?',sr:'konjam kammi panna mudiyuma?',sh:'थोड़ा कम करोगे? (spoken — कम्मि पण्ण)'},
+    {t:'வேற நிறம் இருக்கா?',r:'vera niram irukka?',h:'दूसरा रंग है क्या?',lv:'intermediate',
+     s:'வேற கலர் இருக்கா?',sr:'vera colour irukka?',sh:'दूसरा रंग है? (spoken — color)'},
+    {t:'பெரிய size இருக்கா?',r:'periya size irukka?',h:'बड़ा size है क्या?',lv:'intermediate'},
+    {t:'இது நல்லா இருக்கு',r:'idhu nalla irukku',h:'यह अच्छा है',lv:'basic',
+     s:'இது சூப்பர்',sr:'idhu super',sh:'यह बढ़िया है (spoken — सुपर)'},
+    {t:'வேண்டாம், நன்றி',r:'vendum, nandri',h:'नहीं चाहिए, धन्यवाद',lv:'basic',
+     s:'வேண்டாம்',sr:'vendaam',sh:'नहीं चाहिए (direct spoken — वेण्डाम)'},
+    {t:'ரசீது கொடுங்க',r:'raseedhu kodunga',h:'रसीद दीजिए',lv:'intermediate',
+     s:'பில் போட்டுக் குடுங்க',sr:'bill pottu kudunga',sh:'बिल दे दो (spoken — पिल्ल पोट्टु)'},
+    {t:'Cash or card?',r:'cash illa card?',h:'कैश या कार्ड?',lv:'basic'}
+  ]},
+  feelings:{label:'Feelings',sents:[
+    {t:'எனக்கு மகிழ்ச்சியாக இருக்கிறது',r:'enakku magizhchiyaaga irukkirdhu',h:'मुझे खुशी हो रही है',lv:'intermediate',
+     s:'எனக்கு சந்தோஷமா இருக்கு',sr:'enakku sandhoshamaa irukku',sh:'मुझे खुशी हो रही है (spoken)'},
+    {t:'எனக்கு வலிக்கிறது',r:'enakku valikkiradhu',h:'मुझे दर्द हो रहा है',lv:'basic',
+     s:'எனக்கு வலிக்குது',sr:'enakku valikudhu',sh:'मुझे दर्द हो रहा है (spoken — वलिक्कुधु)'},
+    {t:'எனக்கு காய்ச்சல்',r:'enakku kaaycchal',h:'मुझे बुखार है',lv:'basic',
+     s:'எனக்கு ஜுரம் இருக்கு',sr:'enakku juram irukku',sh:'मुझे बुखार है (spoken — जुरम)'},
+    {t:'நான் சோர்வாக இருக்கிறேன்',r:'naan sorvaa irukkiren',h:'मैं थका हुआ हूँ',lv:'intermediate',
+     s:'நான் டயர்டா இருக்கேன்',sr:'naan tired-aa irukken',sh:'मैं थका हुआ हूँ (spoken — टायर्ड)'},
+    {t:'இது மிகவும் அருமை',r:'idhu migavum arumai',h:'यह बहुत शानदार है',lv:'basic',
+     s:'இது ரொம்ப சூப்பர்',sr:'idhu romba super',sh:'यह बहुत बढ़िया है (spoken — रोम्ब सुपर)'},
+    {t:'எனக்கு இது பிடிக்கவில்லை',r:'enakku idhu pidikkavilla',h:'मुझे यह पसंद नहीं',lv:'intermediate',
+     s:'எனக்கு இது பிடிக்கல',sr:'enakku idhu pidikkala',h:'मुझे यह पसंद नहीं (spoken — पिडिक्कल)'},
+    {t:'எனக்கு தமிழ் சினிமா பிடிக்கும்',r:'enakku tamil cinema pidikkum',h:'मुझे तमिल सिनेमा पसंद है',lv:'intermediate',
+     s:'எனக்கு Tamil movie ரொம்ப பிடிக்கும்',sr:'enakku Tamil movie romba pidikkum',sh:'मुझे तमिल मूवी बहुत पसंद है'},
+    {t:'நான் மிகவும் கோபமாக இருக்கிறேன்',r:'naan migavum kopamaga irukkiren',h:'मैं बहुत गुस्से में हूँ',lv:'intermediate',
+     s:'எனக்கு ரொம்ப கோபமா இருக்கு',sr:'enakku romba kopamaa irukku',sh:'मुझे बहुत गुस्सा आ रहा है (spoken)'},
+    {t:'கவலைப்படாதே',r:'kavalaippadade',h:'चिंता मत करो',lv:'basic',
+     s:'டென்ஷன் படாத',sr:'tension padaadha',sh:'चिंता मत करो (spoken — टेन्शन पडाध)'}
+  ]},
+  food:{label:'Food & Dining',sents:[
+    {t:'சாப்பிட போகலாம்',r:'saappida pogalaam',h:'खाना खाने चलते हैं',lv:'basic',
+     s:'சாப்பிட போலாம்',sr:'saappida polaam',sh:'खाने चलते हैं (spoken shortening — पोलाम)'},
+    {t:'என்ன சாப்பிட விரும்புகிறீர்கள்?',r:'enna saappida virumbugireergal?',h:'आप क्या खाना चाहते हैं?',lv:'intermediate',
+     s:'என்ன சாப்பிட ஆசை?',sr:'enna saappida aasai?',sh:'क्या खाना मन है? (casual — ஆசை = इच्छा)'},
+    {t:'இந்த உணவு மிகவும் சுவையாக உள்ளது',r:'indha unavu migavum suvaiyaaga ulladu',h:'यह खाना बहुत स्वादिष्ट है',lv:'advanced',
+     s:'இந்த சாப்பாடு ரொம்ப தேங்க்',sr:'indha saappaadu romba taste',sh:'यह खाना बहुत टेस्टी है (spoken)'},
+    {t:'தண்ணீர் கொடுங்க',r:'thanneer kodunga',h:'पानी दीजिए',lv:'basic',
+     s:'தண்ணி குடுங்க',sr:'thanni kudunga',sh:'पानी दीजिए (spoken — थन्नि कुदुंग)'},
+    {t:'மசாலா குறைவாக போடுங்க',r:'masala kuraivaa podunga',h:'मसाला कम डालिए',lv:'intermediate',
+     s:'கொஞ்சம் spicy குறைவா போடுங்க',sr:'konjam spicy kuraivaa podunga',sh:'थोड़ा कम मसाला डालिए (spoken)'},
+    {t:'சாப்பாடு ஆச்சா?',r:'saappaadu aacha?',h:'खाना तैयार हो गया?',lv:'basic',
+     s:'சாப்பாடு ரெடியா?',sr:'saappaadu ready-aa?',sh:'खाना रेडी है? (spoken — रेडी)'},
+    {t:'கொஞ்சம் கூட சாப்பிடு',r:'konjam kooda saappidu',h:'थोड़ा और खा',lv:'basic',
+     s:'கொஞ்சம் போட்டுக்கோ',sr:'konjam pottukko',sh:'थोड़ा और ले लो (खाना serve करते हुए)'},
+    {t:'பில் கொண்டாருங்க',r:'bill kondaarunga',h:'बिल लाइए',lv:'intermediate',
+     s:'பில் கேக்கணும்',sr:'bill kekkanum',sh:'बिल मांगना है (spoken)'}
+  ]},
+  advanced:{label:'Advanced',sents:[
+    {t:'நான் தமிழ் கற்றுக்கொண்டிருக்கிறேன்',r:'naan tamil katrukondirukkiren',h:'मैं तमिल सीख रहा हूँ',lv:'advanced',
+     s:'நான் தமிழ் கத்துக்கிட்டு இருக்கேன்',sr:'naan tamil kathukkittu irukkiren',sh:'मैं तमिल सीख रहा हूँ (spoken — कत्तुक्किट्टु)'},
+    {t:'தமிழ் மிகவும் அழகான மொழி',r:'tamil migavum azhagaana mozhi',h:'तमिल बहुत सुंदर भाषा है',lv:'advanced',
+     s:'தமிழ் ரொம்ப அழகான மொழி',sr:'tamil romba azhagaana mozhi',sh:'तमिल बहुत सुंदर भाषा है (spoken — रोम्ब)'},
+    {t:'நாளை நான் சென்னை போவேன்',r:'naalai naan chennai poven',h:'कल मैं चेन्नई जाऊंगा',lv:'advanced',
+     s:'நாளைக்கு நான் Chennai போறேன்',sr:'naalaikku naan Chennai poren',sh:'कल मैं चेन्नई जा रहा हूँ (spoken — पोरेन)'},
+    {t:'அவள் நேற்று பள்ளிக்கு போனாள்',r:'aval netru palliku ponaal',h:'वो कल स्कूल गई',lv:'advanced',
+     s:'அவ நேத்து school போனா',sr:'ava nethu school pona',sh:'वो कल स्कूल गई (spoken — अव, नेत्थु, पोना)'},
+    {t:'உங்களுக்கு தமிழ் தெரியுமா?',r:'ungalukku tamil theriyuma?',h:'क्या आपको तमिल आती है?',lv:'advanced',
+     s:'உனக்கு தமிழ் தெரியுமா?',sr:'unakku tamil theriyuma?',sh:'तुम्हें तमिल आती है? (casual — उनक्कु)'},
+    {t:'என்னால் தமிழ் கொஞ்சம் பேச முடியும்',r:'ennaal tamil konjam peesa mudiyum',h:'मैं थोड़ी तमिल बोल सकता हूँ',lv:'advanced',
+     s:'எனக்கு கொஞ்சம் தமிழ் பேசத் தெரியும்',sr:'enakku konjam tamil pesa theriyum',sh:'मुझे थोड़ी तमिल बोलनी आती है (spoken)'},
+    {t:'நீங்கள் என்ன சாப்பிட விரும்புகிறீர்கள்?',r:'neengal enna saappida virumbugireergal?',h:'आप क्या खाना चाहते हैं?',lv:'advanced',
+     s:'என்ன சாப்பிட ஆசை?',sr:'enna saappida aasai?',sh:'क्या खाना मन है? (spoken shortening)'},
+    {t:'இந்த வாரம் மிகவும் கஷ்டமாக இருந்தது',r:'indha vaaram migavum kashtamaaga irundhadu',h:'यह हफ्ता बहुत मुश्किल था',lv:'advanced',
+     s:'இந்த வாரம் ரொம்ப கஷ்டமா போச்சு',sr:'indha vaaram romba kashtamaa poachu',sh:'यह हफ्ता बहुत मुश्किल रहा (spoken — पोच्चु)'},
+    {t:'நான் ஒரு புத்தகம் படிக்க விரும்புகிறேன்',r:'naan oru puthagam padikka virumbugiren',h:'मैं एक किताब पढ़ना चाहता हूँ',lv:'advanced',
+     s:'நான் ஒரு book படிக்கணும்',sr:'naan oru book padikkanum',sh:'मुझे एक किताब पढ़नी है (spoken — पडिक्कणुम)'},
+    {t:'இது எனக்கு தெரியாது',r:'idhu enakku theriyaadhu',h:'यह मुझे नहीं पता',lv:'intermediate',
+     s:'இது எனக்கு தெரியல',sr:'idhu enakku theriyala',sh:'यह मुझे नहीं पता (spoken — तेरियल)'}
+  ]}
 };
 
 const verbData=[
@@ -1754,8 +2076,33 @@ function buildCT(){
 let wTab='family';
 function buildWordTabs(){document.getElementById('word-tabs').innerHTML=Object.entries(wordCategories).map(([k,v],i)=>`<button class="stab ${i===0?'active':''}" onclick="showWT('${k}')">${v.label}</button>`).join('');}
 function showWT(tab){wTab=tab;document.querySelectorAll('#word-tabs .stab').forEach(b=>b.classList.toggle('active',b.textContent===wordCategories[tab].label));renderWL(wordCategories[tab].words);}
-function renderWL(words){document.getElementById('word-list').innerHTML=words.map(w=>`<div class="word-row" onclick="sah('${w.t.replace(/'/g,"\\'")}',this,'${w.r}')"><span class="wr-tamil">${w.t}</span><div class="wr-info"><div class="wr-roman">${w.r}</div><div class="wr-hindi">${w.h}</div></div><div class="spk-btn">▶</div></div>`).join('');}
-function filterWords(){const q=document.getElementById('word-search').value.toLowerCase();if(!q){renderWL(wordCategories[wTab].words);return;}const all=Object.values(wordCategories).flatMap(c=>c.words);renderWL(all.filter(w=>w.t.includes(q)||w.r.toLowerCase().includes(q)||w.h.toLowerCase().includes(q)));}
+function renderWL(words){
+  document.getElementById('word-list').innerHTML=words.map(w=>{
+    const tEsc=w.t.replace(/'/g,"\\'");
+    const rEsc=w.r.replace(/'/g,"\\'");
+    const formalRow=`<div class="word-row" onclick="sah('${tEsc}',this,'${rEsc}')">
+      <span class="wr-tamil">${w.t}</span>
+      <div class="wr-info">
+        <div class="wr-roman"><span class="word-style-tag tag-formal">Formal</span>${w.r}</div>
+        <div class="wr-hindi">${w.h}</div>
+      </div>
+      <div class="spk-btn">▶</div>
+    </div>`;
+    if(!w.s) return formalRow;
+    const sEsc=w.s.replace(/'/g,"\\'");
+    const srEsc=(w.sr||'').replace(/'/g,"\\'");
+    const spokenRow=`<div class="word-row spoken-row" onclick="sah('${sEsc}',this,'${srEsc}')">
+      <span class="wr-tamil">${w.s}</span>
+      <div class="wr-info">
+        <div class="wr-roman"><span class="word-style-tag tag-spoken">Spoken</span>${w.sr||''}</div>
+        <div class="wr-hindi">${w.sh||w.h}</div>
+      </div>
+      <div class="spk-btn">▶</div>
+    </div>`;
+    return formalRow+spokenRow;
+  }).join('');
+}
+function filterWords(){const q=document.getElementById('word-search').value.toLowerCase();if(!q){renderWL(wordCategories[wTab].words);return;}const all=Object.values(wordCategories).flatMap(c=>c.words);renderWL(all.filter(w=>w.t.includes(q)||w.r.toLowerCase().includes(q)||w.h.toLowerCase().includes(q)||(w.s&&w.s.includes(q))||(w.sr&&w.sr.toLowerCase().includes(q))||(w.sh&&w.sh.toLowerCase().includes(q))));}
 
 // ── NUMBERS 101-300 DATA ─────────────────────────────────────────────────────
 // Generate 101-200
@@ -1821,7 +2168,25 @@ function showST(tab){
   document.getElementById('sent-list').innerHTML=sentenceCategories[tab].sents.map(s=>{
     const tc=s.lv==='basic'?'tag-basic':s.lv==='intermediate'?'tag-intermediate':'tag-advanced';
     const tl=s.lv==='basic'?'Basic':s.lv==='intermediate'?'Intermediate':'Advanced';
-    return`<div class="sent-card" onclick="sah('${s.t.replace(/'/g,"\\'")}',this,'${s.r}')"><div class="sc-tamil">${s.t}</div><div class="sc-roman">${s.r}</div><div class="sc-hindi">${s.h}</div><span class="sc-tag ${tc}">${tl}</span></div>`;
+    const tEsc=s.t.replace(/'/g,"\\'");
+    const sEsc=s.s?s.s.replace(/'/g,"\\'"):'';
+    const srEsc=s.sr?s.sr.replace(/'/g,"\\'"):'';
+    const formalCard=`<div class="sent-card" onclick="sah('${tEsc}',this,'${s.r}')">
+      <div class="sc-style-label sc-label-formal">Formal</div>
+      <div class="sc-tamil">${s.t}</div>
+      <div class="sc-roman">${s.r}</div>
+      <div class="sc-hindi">${s.h}</div>
+      <span class="sc-tag ${tc}">${tl}</span>
+    </div>`;
+    if(!s.s) return`<div style="margin-bottom:7px">${formalCard}</div>`;
+    const spokenCard=`<div class="sent-card spoken-sent" onclick="sah('${sEsc}',this,'${srEsc}')">
+      <div class="sc-style-label sc-label-spoken">Spoken</div>
+      <div class="sc-tamil">${s.s}</div>
+      <div class="sc-roman">${s.sr||''}</div>
+      <div class="sc-hindi">${s.sh||s.h}</div>
+      <span class="sc-tag ${tc}">${tl}</span>
+    </div>`;
+    return`<div class="sent-pair">${formalCard}${spokenCard}</div>`;
   }).join('');
 }
 
