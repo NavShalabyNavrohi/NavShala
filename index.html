@@ -1183,61 +1183,58 @@ body.dark .font-panel,body.dark #font-panel{background:#1a1a2e;border-color:#333
     </div>
   </div>
 
-  <!-- FIREBASE CLOUD SYNC CARD -->
-  <div style="margin-top:12px;background:#fff;border:1.5px solid #e8e8e3;border-radius:12px;overflow:hidden">
-    <div style="background:linear-gradient(135deg,#1a1a2e,#2a2a5e);padding:12px 16px;display:flex;align-items:center;gap:10px">
-      <div style="font-size:20px">☁️</div>
-      <div>
-        <div style="font-size:14px;font-weight:700;color:#fff">Cloud Sync</div>
-        <div style="font-size:11px;color:#8888aa">Progress save across all devices</div>
-      </div>
-      <div style="margin-left:auto" id="sync-status-big"></div>
-    </div>
-    <div style="padding:14px 16px">
-      <!-- Not signed in state -->
-      <button id="fb-signin-btn" onclick="window._fbSignIn&&window._fbSignIn()" style="width:100%;padding:10px;border-radius:10px;border:1.5px solid #e0e0e0;background:#fff;cursor:pointer;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:10px;transition:all 0.15s" onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='#fff'">
-        <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-3.59-13.46-8.69l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-        Sign in with Google to sync progress
-      </button>
-      <!-- Signed in state -->
-      <div id="fb-user-info" style="display:none;align-items:center;gap:12px">
-        <div id="fb-user-avatar" style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;flex-shrink:0">U</div>
-        <div style="flex:1">
-          <div id="fb-user-name" style="font-size:14px;font-weight:700;color:#111"></div>
-          <div style="font-size:11px;color:#10b981;font-weight:600">✓ Progress syncing to cloud</div>
-        </div>
-        <button onclick="window._fbSignOut&&window._fbSignOut()" style="padding:5px 12px;border-radius:20px;border:1px solid #e0e0e0;background:#fff;cursor:pointer;font-size:12px;color:#555;font-weight:600">Sign out</button>
-      </div>
-      <!-- Setup instructions (shown only if Firebase not configured) -->
-      <div id="fb-setup-guide" style="margin-top:12px;padding:12px;background:#f8f8ff;border:1px solid #e0e0ff;border-radius:8px;font-size:12px;color:#444;line-height:1.7">
-        <div style="font-weight:700;color:#2563eb;margin-bottom:6px">⚙️ Setup Guide — 5 steps to enable cloud sync:</div>
-        <div><b>1.</b> Go to <a href="https://console.firebase.google.com" target="_blank" style="color:#2563eb">console.firebase.google.com</a></div>
-        <div><b>2.</b> Click "Add project" → name it (e.g. "tamil-learning") → Create</div>
-        <div><b>3.</b> Click "&lt;/&gt; Web" icon → Register app → copy the firebaseConfig values</div>
-        <div><b>4.</b> In Firebase Console: Authentication → Sign-in method → Enable Google</div>
-        <div><b>5.</b> In Firebase Console: Firestore Database → Create database → Start in test mode</div>
-        <div style="margin-top:8px;padding:8px;background:#fff;border-radius:6px;border:1px solid #e0e0e0">
-          <div style="font-weight:700;color:#111;margin-bottom:4px">Then open this HTML file in a text editor and replace:</div>
-          <code style="font-size:11px;color:#7c3aed;display:block;line-height:1.8">
-            apiKey: "YOUR_API_KEY"  →  your actual key<br>
-            projectId: "YOUR_PROJECT_ID"  →  your project id<br>
-            appId: "YOUR_APP_ID"  →  your app id
-          </code>
-        </div>
-        <div style="margin-top:6px;color:#10b981;font-weight:600">After setup: all users' progress saves to cloud automatically!</div>
-      </div>
-    </div>
-  </div>
 </div>
 
 </div><!-- /content -->
 </div><!-- /app -->
 <div class="pronounce-popup" id="pp" style="opacity:0"></div>
-<div style="text-align:center;padding:18px 16px 28px;font-size:11px;color:#aaa;background:#fff;border-top:1px solid #e8e8e3;margin-top:20px">
-  <div style="font-size:15px;font-weight:900;color:#1a1a2e;margin-bottom:2px;letter-spacing:-0.02em">Nav<span style="color:#7c3aed">Shala</span></div>
-  <div style="color:#7c3aed;font-weight:700;margin-bottom:2px;font-size:13px">Developed by Vipul Kumar <em>"Navrohi"</em></div>
-  <div style="font-size:11px;color:#888;margin-bottom:2px">आपकी digital पाठशाला 🏫</div><div style="font-size:10px;color:#bbb">Tamil सीखते रहो! &nbsp;•&nbsp; வணக்கம் 🙏</div>
-  <div id="sync-status" style="margin-top:8px;font-size:11px;color:#8888aa">📱 Local</div>
+<div style="background:#fff;border-top:1px solid #e8e8e3;margin-top:20px">
+
+  <!-- CLOUD SYNC FOOTER CARD -->
+  <div style="padding:12px 16px">
+    <!-- Not signed in state -->
+    <button id="fb-signin-btn" onclick="window._fbSignIn&&window._fbSignIn()" style="width:100%;padding:10px;border-radius:10px;border:1.5px solid #e0e0e0;background:#fff;cursor:pointer;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:10px;transition:all 0.15s" onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='#fff'">
+      <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-3.59-13.46-8.69l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+      Sign in with Google to sync progress
+    </button>
+    <!-- Signed in state -->
+    <div id="fb-user-info" style="display:none;align-items:center;gap:12px">
+      <div id="fb-user-avatar" style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;flex-shrink:0">U</div>
+      <div style="flex:1">
+        <div id="fb-user-name" style="font-size:14px;font-weight:700;color:#111"></div>
+        <div style="font-size:11px;color:#10b981;font-weight:600">✓ Progress syncing to cloud</div>
+      </div>
+      <button onclick="window._fbSignOut&&window._fbSignOut()" style="padding:5px 12px;border-radius:20px;border:1px solid #e0e0e0;background:#fff;cursor:pointer;font-size:12px;color:#555;font-weight:600">Sign out</button>
+    </div>
+    <!-- Setup instructions -->
+    <div id="fb-setup-guide" style="margin-top:12px;padding:12px;background:#f8f8ff;border:1px solid #e0e0ff;border-radius:8px;font-size:12px;color:#444;line-height:1.7">
+      <div style="font-weight:700;color:#2563eb;margin-bottom:6px">⚙️ Setup Guide — 5 steps to enable cloud sync:</div>
+      <div><b>1.</b> Go to <a href="https://console.firebase.google.com" target="_blank" style="color:#2563eb">console.firebase.google.com</a></div>
+      <div><b>2.</b> Click "Add project" → name it (e.g. "tamil-learning") → Create</div>
+      <div><b>3.</b> Click "&lt;/&gt; Web" icon → Register app → copy the firebaseConfig values</div>
+      <div><b>4.</b> In Firebase Console: Authentication → Sign-in method → Enable Google</div>
+      <div><b>5.</b> In Firebase Console: Firestore Database → Create database → Start in test mode</div>
+      <div style="margin-top:8px;padding:8px;background:#fff;border-radius:6px;border:1px solid #e0e0e0">
+        <div style="font-weight:700;color:#111;margin-bottom:4px">Then open this HTML file in a text editor and replace:</div>
+        <code style="font-size:11px;color:#7c3aed;display:block;line-height:1.8">
+          apiKey: "YOUR_API_KEY"  →  your actual key<br>
+          projectId: "YOUR_PROJECT_ID"  →  your project id<br>
+          appId: "YOUR_APP_ID"  →  your app id
+        </code>
+      </div>
+      <div style="margin-top:6px;color:#10b981;font-weight:600">After setup: all users' progress saves to cloud automatically!</div>
+    </div>
+  </div>
+
+  <!-- BRANDING FOOTER -->
+  <div style="text-align:center;padding:14px 16px 28px;border-top:1px solid #f0f0ea">
+    <div style="font-size:15px;font-weight:900;color:#1a1a2e;margin-bottom:2px;letter-spacing:-0.02em">Nav<span style="color:#7c3aed">Shala</span></div>
+    <div style="color:#7c3aed;font-weight:700;margin-bottom:2px;font-size:13px">Developed by Vipul Kumar <em>"Navrohi"</em></div>
+    <div style="font-size:11px;color:#888;margin-bottom:2px">आपकी digital पाठशाला 🏫</div>
+    <div style="font-size:10px;color:#bbb">Tamil सीखते रहो! &nbsp;•&nbsp; வணக்கம் 🙏</div>
+    <div id="sync-status" style="margin-top:8px;font-size:11px;color:#8888aa">📱 Local</div>
+  </div>
+
 </div>
 
 <script>
