@@ -187,6 +187,13 @@ body.dark .spoken-row .spk-btn{background:#2a1f00;border-color:#7c5c00}
 .num-n{font-size:calc(18px * var(--fs-scale));font-weight:800;color:#2563eb;display:block}
 .num-t{font-size:calc(13px * var(--fs-scale));color:#111;display:block;margin-top:1px;font-weight:600}
 .num-r{font-size:calc(9px * var(--fs-scale));color:#888;font-weight:600}
+.num-spoken-sep{display:block;border-top:1px dashed #f0c040;margin:5px 2px 4px;opacity:0.7}
+.num-spoken-block{background:#fffbeb;border:1px solid #fcd34d;border-radius:6px;padding:4px 5px;margin-top:1px;cursor:pointer;transition:background 0.15s}
+.num-spoken-block:hover{background:#fef3c7;border-color:#f59e0b}
+.num-spoken-block.speaking{background:#d1fae5;border-color:#10b981}
+.num-spoken-label{display:inline-block;font-size:calc(7px * var(--fs-scale));background:#fef3c7;color:#92400e;border-radius:4px;padding:1px 5px;font-weight:700;margin-bottom:2px}
+.num-s{font-size:calc(12px * var(--fs-scale));color:#92400e;display:block;font-weight:600}
+.num-sr{font-size:calc(9px * var(--fs-scale));color:#b45309;font-weight:600}
 /* VERBS */
 .verb-sel{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}
 .vbtn{padding:5px 11px;border-radius:20px;border:1px solid #e0e0e0;background:#fff;cursor:pointer;font-size:12px;color:#555;font-weight:500;transition:all 0.15s}
@@ -637,6 +644,11 @@ body.dark .sc-label-spoken{background:#2a1f00;color:#fcd34d}
 body.dark .num-card{background:#1a1a2e;border-color:#2a2a4e}
 body.dark .num-card:hover{background:#1e2d50;border-color:#2563eb}
 body.dark .num-t{color:#e8e8f0}
+body.dark .num-s{color:#fcd34d}
+body.dark .num-sr{color:#f59e0b}
+body.dark .num-spoken-label{background:#2a1f00;color:#fcd34d}
+body.dark .num-spoken-block{background:#2a1f00;border-color:#7c5c00}
+body.dark .num-spoken-block:hover{background:#332200;border-color:#a07000}
 body.dark .vbtn{background:#1a1a2e;border-color:#2a2a4e;color:#9999cc}
 body.dark .vbtn.active{background:#7c3aed;border-color:#7c3aed;color:#fff}
 body.dark .pattern-pill{background:#2a1a4e;border-color:#7c3aed;color:#c4b5fd}
@@ -1439,7 +1451,9 @@ const wordCategories={
 // Numbers 0-100
 const tnums=['பூஜ்யம்','ஒன்று','இரண்டு','மூன்று','நான்கு','ஐந்து','ஆறு','ஏழு','எட்டு','ஒன்பது','பத்து','பதினொன்று','பன்னிரண்டு','பதின்மூன்று','பதினான்கு','பதினைந்து','பதினாறு','பதினேழு','பதினெட்டு','பத்தொன்பது','இருபது','இருபத்தொன்று','இருபத்திரண்டு','இருபத்திமூன்று','இருபத்தினான்கு','இருபத்தைந்து','இருபத்தாறு','இருபத்தேழு','இருபத்தெட்டு','இருபத்தொன்பது','முப்பது','முப்பத்தொன்று','முப்பத்திரண்டு','முப்பத்திமூன்று','முப்பத்தினான்கு','முப்பத்தைந்து','முப்பத்தாறு','முப்பத்தேழு','முப்பத்தெட்டு','முப்பத்தொன்பது','நாற்பது','நாற்பத்தொன்று','நாற்பத்திரண்டு','நாற்பத்திமூன்று','நாற்பத்தினான்கு','நாற்பத்தைந்து','நாற்பத்தாறு','நாற்பத்தேழு','நாற்பத்தெட்டு','நாற்பத்தொன்பது','ஐம்பது','ஐம்பத்தொன்று','ஐம்பத்திரண்டு','ஐம்பத்திமூன்று','ஐம்பத்தினான்கு','ஐம்பத்தைந்து','ஐம்பத்தாறு','ஐம்பத்தேழு','ஐம்பத்தெட்டு','ஐம்பத்தொன்பது','அறுபது','அறுபத்தொன்று','அறுபத்திரண்டு','அறுபத்திமூன்று','அறுபத்தினான்கு','அறுபத்தைந்து','அறுபத்தாறு','அறுபத்தேழு','அறுபத்தெட்டு','அறுபத்தொன்பது','எழுபது','எழுபத்தொன்று','எழுபத்திரண்டு','எழுபத்திமூன்று','எழுபத்தினான்கு','எழுபத்தைந்து','எழுபத்தாறு','எழுபத்தேழு','எழுபத்தெட்டு','எழுபத்தொன்பது','எண்பது','எண்பத்தொன்று','எண்பத்திரண்டு','எண்பத்திமூன்று','எண்பத்தினான்கு','எண்பத்தைந்து','எண்பத்தாறு','எண்பத்தேழு','எண்பத்தெட்டு','எண்பத்தொன்பது','தொண்ணூறு','தொண்ணூத்தொன்று','தொண்ணூத்திரண்டு','தொண்ணூத்திமூன்று','தொண்ணூத்தினான்கு','தொண்ணூத்தைந்து','தொண்ணூத்தாறு','தொண்ணூத்தேழு','தொண்ணூத்தெட்டு','தொண்ணூத்தொன்பது','நூறு'];
 const rnums=['poojiyam','ondru','irandu','moondru','naangu','aindhu','aaru','ezhu','ettu','onbadhu','pathu','pathinondru','pannirandu','padhinmoondru','padhinaangu','padhinaindhu','padhinaaru','padhinezhu','padhinedu','pathonbadhu','irupadu','irupathu ondru','irupathu irandu','irupathu moondru','irupathu naangu','irupathu aindhu','irupathu aaru','irupathu ezhu','irupathu ettu','irupathu onbadhu','muppadu','muppathu ondru','muppathu irandu','muppathu moondru','muppathu naangu','muppathu aindhu','muppathu aaru','muppathu ezhu','muppathu ettu','muppathu onbadhu','naarpadu','naarpathu ondru','naarpathu irandu','naarpathu moondru','naarpathu naangu','naarpathu aindhu','naarpathu aaru','naarpathu ezhu','naarpathu ettu','naarpathu onbadhu','aimbadu','aimpathu ondru','aimpathu irandu','aimpathu moondru','aimpathu naangu','aimpathu aindhu','aimpathu aaru','aimpathu ezhu','aimpathu ettu','aimpathu onbadhu','arubadu','arupathu ondru','arupathu irandu','arupathu moondru','arupathu naangu','arupathu aindhu','arupathu aaru','arupathu ezhu','arupathu ettu','arupathu onbadhu','ezhubadu','ezhupathu ondru','ezhupathu irandu','ezhupathu moondru','ezhupathu naangu','ezhupathu aindhu','ezhupathu aaru','ezhupathu ezhu','ezhupathu ettu','ezhupathu onbadhu','enbadu','enpathu ondru','enpathu irandu','enpathu moondru','enpathu naangu','enpathu aindhu','enpathu aaru','enpathu ezhu','enpathu ettu','enpathu onbadhu','thonnuru','thonnuru ondru','thonnuru irandu','thonnuru moondru','thonnuru naangu','thonnuru aindhu','thonnuru aaru','thonnuru ezhu','thonnuru ettu','thonnuru onbadhu','nooru'];
-const numbers=[];for(let i=0;i<=100;i++)numbers.push({n:i,t:tnums[i],r:rnums[i]});
+const snums=['சுழி','ஒன்னு','ரெண்டு','மூணு','நாலு','ஐஞ்சு','ஆறு','ஏழு','எட்டு','ஒம்பது','பத்து','பதினொன்னு','பன்னெண்டு','பதிமூணு','பதினாலு','பதினஞ்சு','பதினாறு','பதினேழு','பதினெட்டு','பத்தொம்பது','இருபது','இருபத்தொன்னு','இருபத்திரெண்டு','இருபத்திமூணு','இருபத்தினாலு','இருபத்தஞ்சு','இருபத்தாறு','இருபத்தேழு','இருபத்தெட்டு','இருபத்தொம்பது','முப்பது','முப்பத்தொன்னு','முப்பத்திரெண்டு','முப்பத்திமூணு','முப்பத்தினாலு','முப்பத்தஞ்சு','முப்பத்தாறு','முப்பத்தேழு','முப்பத்தெட்டு','முப்பத்தொம்பது','நாப்பது','நாப்பத்தொன்னு','நாப்பத்திரெண்டு','நாப்பத்திமூணு','நாப்பத்தினாலு','நாப்பத்தஞ்சு','நாப்பத்தாறு','நாப்பத்தேழு','நாப்பத்தெட்டு','நாப்பத்தொம்பது','ஐம்பது','ஐம்பத்தொன்னு','ஐம்பத்திரெண்டு','ஐம்பத்திமூணு','ஐம்பத்தினாலு','ஐம்பத்தஞ்சு','ஐம்பத்தாறு','ஐம்பத்தேழு','ஐம்பத்தெட்டு','ஐம்பத்தொம்பது','அறுபது','அறுபத்தொன்னு','அறுபத்திரெண்டு','அறுபத்திமூணு','அறுபத்தினாலு','அறுபத்தஞ்சு','அறுபத்தாறு','அறுபத்தேழு','அறுபத்தெட்டு','அறுபத்தொம்பது','எழுபது','எழுபத்தொன்னு','எழுபத்திரெண்டு','எழுபத்திமூணு','எழுபத்தினாலு','எழுபத்தஞ்சு','எழுபத்தாறு','எழுபத்தேழு','எழுபத்தெட்டு','எழுபத்தொம்பது','எண்பது','எண்பத்தொன்னு','எண்பத்திரெண்டு','எண்பத்திமூணு','எண்பத்தினாலு','எண்பத்தஞ்சு','எண்பத்தாறு','எண்பத்தேழு','எண்பத்தெட்டு','எண்பத்தொம்பது','தொண்ணூறு','தொண்ணூத்தொன்னு','தொண்ணூத்திரெண்டு','தொண்ணூத்திமூணு','தொண்ணூத்தினாலு','தொண்ணூத்தஞ்சு','தொண்ணூத்தாறு','தொண்ணூத்தேழு','தொண்ணூத்தெட்டு','தொண்ணூத்தொம்பது','நூறு'];
+const srnums=['suzhi','onnu','rendu','moonu','naalu','ainju','aaru','ezhu','ettu','ombadhu','pathu','padhinonnu','pannendu','padhimoonu','padhinaalu','padhinarnju','padhinaaru','padhinezhu','padhinedu','pathombadhu','irupadu','irupathu onnu','irupathu rendu','irupathu moonu','irupathu naalu','irupathu ainju','irupathu aaru','irupathu ezhu','irupathu ettu','irupathu ombadhu','muppadu','muppathu onnu','muppathu rendu','muppathu moonu','muppathu naalu','muppathu ainju','muppathu aaru','muppathu ezhu','muppathu ettu','muppathu ombadhu','naappadhu','naappathu onnu','naappathu rendu','naappathu moonu','naappathu naalu','naappathu ainju','naappathu aaru','naappathu ezhu','naappathu ettu','naappathu ombadhu','aimbadu','aimpathu onnu','aimpathu rendu','aimpathu moonu','aimpathu naalu','aimpathu ainju','aimpathu aaru','aimpathu ezhu','aimpathu ettu','aimpathu ombadhu','arubadu','arupathu onnu','arupathu rendu','arupathu moonu','arupathu naalu','arupathu ainju','arupathu aaru','arupathu ezhu','arupathu ettu','arupathu ombadhu','ezhubadu','ezhupathu onnu','ezhupathu rendu','ezhupathu moonu','ezhupathu naalu','ezhupathu ainju','ezhupathu aaru','ezhupathu ezhu','ezhupathu ettu','ezhupathu ombadhu','enbadu','enpathu onnu','enpathu rendu','enpathu moonu','enpathu naalu','enpathu ainju','enpathu aaru','enpathu ezhu','enpathu ettu','enpathu ombadhu','thonnuru','thonnuru onnu','thonnuru rendu','thonnuru moonu','thonnuru naalu','thonnuru ainju','thonnuru aaru','thonnuru ezhu','thonnuru ettu','thonnuru ombadhu','nooru'];
+const numbers=[];for(let i=0;i<=100;i++)numbers.push({n:i,t:tnums[i],r:rnums[i],s:snums[i],sr:srnums[i]});
 // Large numbers
 const largeNums=[
   {n:'200',t:'இருநூறு',r:'irunooru',h:'दो सौ'},{n:'300',t:'முந்நூறு',r:'munnooru',h:'तीन सौ'},{n:'400',t:'நானூறு',r:'naanooru',h:'चार सौ'},{n:'500',t:'ஐந்நூறு',r:'aindnooru',h:'पाँच सौ'},{n:'600',t:'அறுநூறு',r:'arunooru',h:'छह सौ'},{n:'700',t:'எழுநூறு',r:'ezhunooru',h:'सात सौ'},{n:'800',t:'எண்ணூறு',r:'ennooru',h:'आठ सौ'},{n:'900',t:'தொள்ளாயிரம்',r:'thollayiram',h:'नौ सौ'},{n:'1,000',t:'ஆயிரம்',r:'aayiram',h:'एक हज़ार'},{n:'2,000',t:'இரண்டாயிரம்',r:'irandaayiram',h:'दो हज़ार'},{n:'5,000',t:'ஐந்தாயிரம்',r:'aindhaayiram',h:'पाँच हज़ार'},{n:'10,000',t:'பத்தாயிரம்',r:'pathhaayiram',h:'दस हज़ार'},{n:'25,000',t:'இருபத்தைந்தாயிரம்',r:'irupathaindhaayiram',h:'पच्चीस हज़ार'},{n:'50,000',t:'ஐம்பதாயிரம்',r:'aimpadaayiram',h:'पचास हज़ार'},{n:'1,00,000',t:'ஒரு லட்சம்',r:'oru laksham',h:'एक लाख'},{n:'10,00,000',t:'பத்து லட்சம்',r:'pathu laksham',h:'दस लाख'},{n:'1,00,00,000',t:'ஒரு கோடி',r:'oru kodi',h:'एक करोड़'},{n:'10,00,00,000',t:'பத்து கோடி',r:'pathu kodi',h:'दस करोड़'}
@@ -2222,7 +2236,15 @@ function showNumTab(tab){
   else if(tab==='101-200')nums=nums101to200;
   else if(tab==='201-300')nums=nums201to300;
   else nums=specialNums;
-  document.getElementById('num-grid').innerHTML=nums.map(n=>`<div class="num-card" onclick="sah('${n.t.replace(/'/g,"\\'")}',this,'${n.r}')"><span class="num-n">${n.n}</span><span class="num-t">${n.t}</span><span class="num-r">${n.r}${n.h?' · '+n.h:''}</span></div>`).join('');
+  document.getElementById('num-grid').innerHTML=nums.map(n=>{
+    const tEsc=n.t.replace(/'/g,"\\'");
+    const sEsc=(n.s||'').replace(/'/g,"\\'");
+    const srEsc=(n.sr||'').replace(/'/g,"\\'");
+    const spokenHtml=n.s
+      ?`<span class="num-spoken-sep"></span><div class="num-spoken-block" onclick="event.stopPropagation();sah('${sEsc}',this,'${srEsc}')"><span class="num-spoken-label">▶ Spoken</span><span class="num-s">${n.s}</span><span class="num-sr">${n.sr||''}</span></div>`
+      :'';
+    return`<div class="num-card" onclick="sah('${tEsc}',this,'${n.r}')"><span class="num-n">${n.n}</span><span class="num-t">${n.t}</span><span class="num-r">${n.r}${n.h?' · '+n.h:''}</span>${spokenHtml}</div>`;
+  }).join('');
 }
 
 // ── SENTENCES ───────────────────────────────────────────────────────────────────
