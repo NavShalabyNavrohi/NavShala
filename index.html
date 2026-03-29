@@ -1912,7 +1912,7 @@ function updateHUD(){
     const curIdx=LEVELS.findIndex(l=>l.n===li.name);
     const nextLv=LEVELS[curIdx+1];
     if(nextLv){
-      needEl.textContent=(nextLv.m-P.xp)+' more XP';
+      needEl.textContent=(LEVELS[curIdx].m-P.xp)+' more XP';
       nextEl.textContent=nextLv.n;
       noteEl.style.display='flex';
     } else {
