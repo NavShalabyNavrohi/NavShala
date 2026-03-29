@@ -148,6 +148,7 @@ body{font-family:system-ui,sans-serif;background:#f5f5f0;color:#1a1a1a;font-size
 .spk-btn{width:28px;height:28px;border-radius:50%;background:#eff6ff;border:1px solid #bfdbfe;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
 .spoken-row .spk-btn{background:#fef9c3;border-color:#fcd34d}
 .word-style-tag{display:inline-block;font-size:10px;font-weight:700;padding:1px 6px;border-radius:20px;margin-right:5px;vertical-align:middle}
+.wr-note{font-size:11px;color:#7c5c00;background:#fffbeb;border-left:3px solid #f59e0b;padding:6px 10px;margin:0 0 8px 0;border-radius:0 6px 6px 0;line-height:1.5}
 .tag-formal{background:#eff6ff;color:#1e40af}
 .tag-spoken{background:#fef3c7;color:#92400e}
 body.dark .word-row{background:#1a1a2e;border-color:#2a2a4e}
@@ -631,6 +632,7 @@ body.dark .word-row{background:#1a1a2e;border-color:#2a2a4e}
 body.dark .word-row:hover{background:#1e2d50;border-color:#2563eb}
 body.dark .wr-tamil{color:#e8e8f0}
 body.dark .wr-hindi{color:#8888bb}
+body.dark .wr-note{background:#2a1f00;color:#fcd34d;border-left-color:#a07000}
 body.dark .spk-btn{background:#1e2d50;border-color:#2563eb}
 body.dark .sent-card{background:#1a1a2e;border-color:#2a2a4e}
 body.dark .sent-card:hover{background:#1e2d50;border-color:#2563eb}
@@ -1256,7 +1258,7 @@ const wordCategories={
   family:{label:'Family',words:[
     {t:'அம்மா',r:'amma',h:'माँ'},
     {t:'அப்பா',r:'appa',h:'पिताजी'},
-    {t:'அண்ணன்',r:'annan',h:'बड़ा भाई',s:'அண்ணா',sr:'anna',sh:'बड़ा भाई (address term — अण्णा बोलते हैं)'},
+    {t:'அண்ணன்',r:'annan',h:'बड़ा भाई',s:'அண்ணா',sr:'anna',sh:'बड़ा भाई / किसी भी बड़े पुरुष को बुलाना (अण्णा)',note:'अपने बड़े भाई के लिए अण्णन्; लेकिन address करने में सिर्फ अण्णा बोलते हैं'},
     {t:'அக்கா',r:'akka',h:'बड़ी बहन'},
     {t:'தம்பி',r:'thambi',h:'छोटा भाई'},
     {t:'தங்கை',r:'thangai',h:'छोटी बहन'},
@@ -1270,6 +1272,20 @@ const wordCategories={
     {t:'மனைவி',r:'manaivi',h:'पत्नी'},
     {t:'மகன்',r:'magan',h:'बेटा'},
     {t:'மகள்',r:'magal',h:'बेटी'}
+  ]},
+  address:{label:'🙏 Address',words:[
+    {t:'அண்ணா',r:'anna',h:'भाई / दादा (address)',s:'அண்ணா வாங்க',sr:'anna vaanga',sh:'भाई आइए — किसी भी अजनबी पुरुष को बुलाने का तरीका',note:'Chennai में हर बड़े पुरुष को அண்ணா कहते हैं — auto driver, shopkeeper, stranger। ये सबसे ज़रूरी शब्द है!'},
+    {t:'அக்கா',r:'akka',h:'दीदी / बहन (address)',s:'அக்கா கொஞ்சம் பாருங்க',sr:'akka konjam paarunga',sh:'दीदी ज़रा देखिए — महिला दुकानदार को बुलाना',note:'किसी भी बड़ी महिला को अक्का बोलें — very respectful और natural लगता है'},
+    {t:'தம்பி',r:'thambi',h:'छोटे भाई (address)',s:'தம்பி இங்க வா',sr:'thambi inga vaa',sh:'छोटे यहाँ आ — छोटे लड़के को बुलाना',note:'अपने से छोटे पुरुष को तम्बी बोलें — office boys, delivery boys के लिए perfect'},
+    {t:'தங்கை',r:'thangai',h:'छोटी बहन (address)',s:'தங்கை கேளு',sr:'thangai kelu',sh:'छोटी बहन सुनो',note:'अपनी से छोटी महिला को तंगई — office में junior colleagues के लिए'},
+    {t:'மாமா',r:'maama',h:'मामा / अंकल (address)',s:'மாமா எங்க போற?',sr:'maama enga pora?',sh:'मामा कहाँ जा रहे हो? — auto driver को',note:'Middle-aged पुरुष के लिए — auto drivers, chai wala, security guard। हिंदी के \"भाई साहब\" जैसा'},
+    {t:'சார்',r:'saar',h:'सर / साहब',s:'சார் வந்தாச்சு',sr:'saar vandhaachu',sh:'सर आ गए',note:'Boss, officer, senior colleague के लिए। Government office में सबसे useful — \"சார் கொஞ்சம் பாருங்க\" = Sir ज़रा देखिए'},
+    {t:'மேடம்',r:'madam',h:'मैडम',s:'மேடம் sign பண்ணுங்க',sr:'madam sign pannunga',sh:'मैडम sign कीजिए',note:'Female senior/officer के लिए। Office में female boss को madam — same as Hindi'},
+    {t:'ஐயா',r:'aiyaa',h:'श्रीमान / महोदय',s:'ஐயா வணக்கம்',sr:'aiyaa vanakkam',sh:'श्रीमान नमस्ते — बड़े बुज़ुर्ग को',note:'Very respectful — बड़े बुज़ुर்ग या senior officer के लिए formal address'},
+    {t:'அம்மா',r:'amma',h:'अम्मा / माँ (address)',s:'அம்மா இது எவ்ளோ?',sr:'amma idhu evlo?',sh:'अम्मा यह कितने का? — सब्ज़ीवाली से',note:'बाज़ार में बड़ी उम्र की महिलाओं को अम्मा बोलें — very warm और respectful'},
+    {t:'நண்பா',r:'nanba',h:'दोस्त (m, calling)',s:'நண்பா என்ன பண்ற?',sr:'nanba enna panra?',sh:'यार क्या कर रहे हो?',note:'Male friend को directly बुलाने का तरीका। Female friend के लिए: நண்பி (nanbi)'},
+    {t:'மச்சான்',r:'macchaan',h:'साले / यार (close friend)',s:'மச்சான் வந்துடு',sr:'macchaan vandudu',sh:'यार आ जा',note:'बहुत करीबी male friend के लिए — Hindi \"यार\" जैसा। Formal situations में use मत करो'},
+    {t:'குழந்தை',r:'kuzhandhai',h:'बच्चे (address)',s:'குழந்தை வா',sr:'kuzhandhai vaa',sh:'बच्चे आ',note:'छोटे बच्चों को प्यार से बुलाने के लिए'},
   ]},
   body:{label:'Body',words:[
     {t:'தலை',r:'thalai',h:'सिर'},
@@ -2155,6 +2171,7 @@ function renderWL(words){
   document.getElementById('word-list').innerHTML=words.map(w=>{
     const tEsc=w.t.replace(/'/g,"\\'");
     const rEsc=w.r.replace(/'/g,"\\'");
+    const noteHtml=w.note?`<div class="wr-note">💡 ${w.note}</div>`:'';
     const formalRow=`<div class="word-row" onclick="sah('${tEsc}',this,'${rEsc}')">
       <span class="wr-tamil">${w.t}</span>
       <div class="wr-info">
@@ -2163,7 +2180,7 @@ function renderWL(words){
       </div>
       <div class="spk-btn">▶</div>
     </div>`;
-    if(!w.s) return formalRow;
+    if(!w.s) return formalRow+noteHtml;
     const sEsc=w.s.replace(/'/g,"\\'");
     const srEsc=(w.sr||'').replace(/'/g,"\\'");
     const spokenRow=`<div class="word-row spoken-row" onclick="sah('${sEsc}',this,'${srEsc}')">
@@ -2174,7 +2191,7 @@ function renderWL(words){
       </div>
       <div class="spk-btn">▶</div>
     </div>`;
-    return formalRow+spokenRow;
+    return formalRow+spokenRow+noteHtml;
   }).join('');
 }
 function filterWords(){const q=document.getElementById('word-search').value.toLowerCase();if(!q){renderWL(wordCategories[wTab].words);return;}const all=Object.values(wordCategories).flatMap(c=>c.words);renderWL(all.filter(w=>w.t.includes(q)||w.r.toLowerCase().includes(q)||w.h.toLowerCase().includes(q)||(w.s&&w.s.includes(q))||(w.sr&&w.sr.toLowerCase().includes(q))||(w.sh&&w.sh.toLowerCase().includes(q))));}
