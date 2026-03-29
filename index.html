@@ -900,7 +900,7 @@ body.dark .font-panel,body.dark #font-panel{background:#1a1a2e;border-color:#333
 <!-- DIALOGUES -->
 <div id="s-dialogues" class="section">
   <div class="sub-tabs" id="dlg-tabs"></div>
-  <div class="tip-box">किसी भी bubble को tap करें उस line को सुनने के लिए। Real-life conversations practice करें!</div>
+  <div class="tip-box">किसी भी bubble को tap करें सुनने के लिए। 🏛️ Govt Counter · ☕ Canteen · 🚕 Auto — ये tabs specially आपके office colleagues के लिए हैं!</div>
   <div id="dlg-content"></div>
 </div>
 
@@ -1720,6 +1720,55 @@ const dialogueCategories={
     {speaker:'B',name:'Ravi',t:'சரியா! எத்தனை மணிக்கு?',r:'sariya! ethanai manikku?',h:'ठीक है! कितने बजे?'},
     {speaker:'A',name:'Arun',t:'மாலை ஆறு மணிக்கு. Theatre-ல சந்திக்கலாம்.',r:'maalai aaru manikku. Theatre-la sandhikkalaam.',h:'शाम छह बजे। Theatre में मिलते हैं।'},
     {speaker:'B',name:'Ravi',t:'ஓகே, வர்றேன்!',r:'okay, varrren!',h:'ठीक है, आता हूँ!'}
+  ]},
+  office:{label:'🏛️ Govt Counter',situation:'सरकारी counter पर file का काम — सबसे ज़रूरी!',lines:[
+    {speaker:'A',name:'North Indian Employee',t:'நமஸ்கரம் சார், என் file கொஞ்சம் பாருங்க.',r:'namaskaram saar, en file konjam paarunga.',h:'नमस्ते सर, मेरी file ज़रा देखिए।'},
+    {speaker:'B',name:'Clerk',t:'யாரோட file? பேரு சொல்லுங்க.',r:'yaaroda file? peru sollunga.',h:'किसकी file? नाम बताइए।'},
+    {speaker:'A',name:'Employee',t:'என் பேரு Ramesh, Section 3-ல work பண்றேன்.',r:'en peru Ramesh, section 3-la work panren.',h:'मेरा नाम Ramesh है, Section 3 में काम करता हूँ।'},
+    {speaker:'B',name:'Clerk',t:'File number இருக்கா?',r:'file number irukka?',h:'File number है?'},
+    {speaker:'A',name:'Employee',t:'ஆமா சார், இதோ — GX/2024/1456.',r:'aama saar, idho — GX/2024/1456.',h:'हाँ सर, यह रहा — GX/2024/1456।'},
+    {speaker:'B',name:'Clerk',t:'சரி, கொஞ்சம் wait பண்ணுங்க. Check பண்றேன்.',r:'sari, konjam wait pannunga. check panren.',h:'ठीक है, थोड़ा रुकिए। Check करता हूँ।'},
+    {speaker:'A',name:'Employee',t:'எவ்வளவு நேரம் ஆகும் சார்?',r:'evvalavu neram aagum saar?',h:'कितना समय लगेगा सर?'},
+    {speaker:'B',name:'Clerk',t:'பத்து நிமிஷம் ஆகும். அந்த bench-ல உட்காருங்க.',r:'pathu nimisham aagum. andha bench-la utkaarunga.',h:'दस मिनट लगेगा। उस bench पर बैठिए।'}
+  ]},
+  canteen:{label:'☕ Office Canteen',situation:'Office canteen में lunch order करना',lines:[
+    {speaker:'A',name:'Employee',t:'அண்ணா, இன்னிக்கு என்ன இருக்கு?',r:'anna, innikku enna irukku?',h:'भाई, आज क्या है?'},
+    {speaker:'B',name:'Canteen Staff',t:'சாம்பார் rice, ரொட்டி கறி, நூடுல்ஸ் இருக்கு சார்.',r:'saambaar rice, rotti kari, noodles irukku saar.',h:'सांभर राइस, रोटी करी, नूडल्स है सर।'},
+    {speaker:'A',name:'Employee',t:'சாம்பார் rice ஒண்ணு கொடுங்க. Spicy இருக்கா?',r:'saambaar rice onnu kodunga. spicy irukka?',h:'एक सांभर राइस दीजिए। तीखा है?'},
+    {speaker:'B',name:'Canteen Staff',t:'கொஞ்சம் spicy இருக்கும். Curd வேணுமா?',r:'konjam spicy irukkum. curd venuma?',h:'थोड़ा तीखा होगा। दही चाहिए?'},
+    {speaker:'A',name:'Employee',t:'ஆமா, curd போட்டுக் குடுங்க.',r:'aama, curd pottukku dunga.',h:'हाँ, दही डाल दीजिए।'},
+    {speaker:'B',name:'Canteen Staff',t:'சரி சார், இருபது ரூபா.',r:'sari saar, irupadu rooba.',h:'ठीक है सर, बीस रुपये।'},
+    {speaker:'A',name:'Employee',t:'இதோ பாருங்க — UPI பண்ணலாமா?',r:'idho paarunga — UPI pannalama?',h:'यह रहा — UPI कर सकते हैं?'},
+    {speaker:'B',name:'Canteen Staff',t:'ஆமா, QR scan பண்ணுங்க.',r:'aama, QR scan pannunga.',h:'हाँ, QR scan कीजिए।'}
+  ]},
+  auto:{label:'🚕 Auto / Cab',situation:'Auto driver से किराया तय करना — daily use!',lines:[
+    {speaker:'A',name:'Passenger',t:'அண்ணா, Central station போகணும். எவ்வளவு?',r:'anna, central station poganum. evvalavu?',h:'भाई, Central station जाना है। कितना?'},
+    {speaker:'B',name:'Auto Driver',t:'நூறு ரூபா சார்.',r:'nooru rooba saar.',h:'सौ रुपये सर।'},
+    {speaker:'A',name:'Passenger',t:'Meter-ல போலாமா?',r:'meter-la polama?',h:'Meter से चलोगे?'},
+    {speaker:'B',name:'Auto Driver',t:'இந்த road-ல traffic ரொம்ப இருக்கு சார். Eighty போதுமா?',r:'indha road-la traffic romba irukku saar. eighty podhuma?',h:'इस road पर traffic बहुत है सर। अस्सी चलेगा?'},
+    {speaker:'A',name:'Passenger',t:'Seventy கொடுக்கிறேன். சரியா?',r:'seventy kodukkiren. sariya?',h:'सत्तर दूंगा। ठीक है?'},
+    {speaker:'B',name:'Auto Driver',t:'சரிங்க, வாங்க சார்.',r:'saringa, vaanga saar.',h:'ठीक है, आइए सर।'},
+    {speaker:'A',name:'Passenger',t:'AC போடுங்க, ரொம்ப சூடா இருக்கு.',r:'AC podunga, romba sooda irukku.',h:'AC लगाइए, बहुत गरम है।'},
+    {speaker:'B',name:'Auto Driver',t:'AC இல்ல சார், fan மட்டும் இருக்கு.',r:'AC illa saar, fan mattum irukku.',h:'AC नहीं है सर, सिर्फ fan है।'}
+  ]},
+  medical:{label:'💊 Medical Shop',situation:'Medical shop में दवाई लेना',lines:[
+    {speaker:'A',name:'Customer',t:'அண்ணா, Dolo 650 இருக்கா?',r:'anna, Dolo 650 irukka?',h:'भाई, Dolo 650 है?'},
+    {speaker:'B',name:'Pharmacist',t:'இருக்கு சார். எத்தனை வேணும்?',r:'irukku saar. ethanai venum?',h:'है सर। कितना चाहिए?'},
+    {speaker:'A',name:'Customer',t:'ஒரு strip கொடுங்க. வேற pain killer இருக்கா?',r:'oru strip kodunga. vera pain killer irukka?',h:'एक strip दीजिए। और कोई pain killer है?'},
+    {speaker:'B',name:'Pharmacist',t:'Ibuprofen இருக்கு சார். Doctor prescription இருக்கா?',r:'Ibuprofen irukku saar. doctor prescription irukka?',h:'Ibuprofen है सर। Doctor prescription है?'},
+    {speaker:'A',name:'Customer',t:'இல்ல. OTC-ல கிடைக்குமா?',r:'illa. OTC-la kidaikkuma?',h:'नहीं। OTC में मिलेगा?'},
+    {speaker:'B',name:'Pharmacist',t:'சரி சார், Dolo மட்டும் கொடுக்கிறேன். முப்பது ரூபா.',r:'sari saar, Dolo mattum kodukkiren. muppadu rooba.',h:'ठीक है सर, सिर्फ Dolo दूंगा। तीस रुपये।'},
+    {speaker:'A',name:'Customer',t:'இதோ, thanks அண்ணா.',r:'idho, thanks anna.',h:'यह रहा, thanks भाई।'}
+  ]},
+  security:{label:'🏠 Security Gate',situation:'Office gate पर security guard से बात करना',lines:[
+    {speaker:'A',name:'Employee',t:'வணக்கம். நான் Section 4-ல work பண்றேன்.',r:'vanakkam. naan section 4-la work panren.',h:'नमस्ते। मैं Section 4 में काम करता हूँ।'},
+    {speaker:'B',name:'Security',t:'ID card காட்டுங்க சார்.',r:'ID card kaattunga saar.',h:'ID card दिखाइए सर।'},
+    {speaker:'A',name:'Employee',t:'இதோ என்னோட ID card.',r:'idho ennoda ID card.',h:'यह रहा मेरा ID card।'},
+    {speaker:'B',name:'Security',t:'New face பார்க்கிறேன். எந்த department சார்?',r:'new face paarkiren. endha department saar?',h:'नया चेहरा देख रहा हूँ। कौन सा department सर?'},
+    {speaker:'A',name:'Employee',t:'Revenue department. Last month transfer ஆனேன்.',r:'Revenue department. last month transfer aanen.',h:'Revenue department। पिछले महीने transfer हुआ।'},
+    {speaker:'B',name:'Security',t:'சரி சார். Register-ல sign பண்ணுங்க.',r:'sari saar. register-la sign pannunga.',h:'ठीक है सर। Register में sign कीजिए।'},
+    {speaker:'A',name:'Employee',t:'ரொம்ப thanks. Parking எங்க இருக்கு சார்?',r:'romba thanks. parking enga irukku saar?',h:'बहुत thanks। Parking कहाँ है सर?'},
+    {speaker:'B',name:'Security',t:'Left side-ல போங்க சார். B block-க்கு பக்கத்துல.',r:'left side-la ponga saar. B block-kku pakkathula.',h:'Left side जाइए सर। B block के पास।'}
   ]}
 };
 
@@ -3924,6 +3973,11 @@ const skillUnits=[
     {id:'n23',icon:'🛒',label:'Market (7 lines)',type:'dialogues',mode:'market',xp:12,total:7},
     {id:'n24',icon:'🍽️',label:'Restaurant (8 lines)',type:'dialogues',mode:'restaurant',xp:12,total:8},
     {id:'n25',icon:'🗺️',label:'Directions (7 lines)',type:'dialogues',mode:'directions',xp:12,total:7},
+    {id:'n26',icon:'🏛️',label:'Govt Counter (8 lines)',type:'dialogues',mode:'office',xp:15,total:8},
+    {id:'n27',icon:'☕',label:'Office Canteen (8 lines)',type:'dialogues',mode:'canteen',xp:12,total:8},
+    {id:'n28',icon:'🚕',label:'Auto / Cab (8 lines)',type:'dialogues',mode:'auto',xp:12,total:8},
+    {id:'n29',icon:'💊',label:'Medical Shop (7 lines)',type:'dialogues',mode:'medical',xp:10,total:7},
+    {id:'n30',icon:'🏠',label:'Security Gate (8 lines)',type:'dialogues',mode:'security',xp:10,total:8},
     {id:'n26',icon:'📝',label:'Mixed Quiz (10✓)',type:'quiz',mode:'mixed',xp:25,total:10},
   ]},
 ];
