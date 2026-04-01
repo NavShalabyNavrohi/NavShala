@@ -466,7 +466,7 @@ body.dark .spoken-row .spk-btn{background:#2a1f00;border-color:#7c5c00}
 @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.12)}100%{transform:scale(1)}}
 /* SR badge */
 .sr-badge{display:inline-flex;align-items:center;gap:4px;background:#fef3c7;border:1px solid #fde047;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:700;color:#854d0e;margin-left:8px}
-.pronounce-popup{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1a1a2e;color:#fff;padding:12px 28px 14px;border-radius:14px;font-size:15px;text-align:center;z-index:9999;pointer-events:none;transition:opacity 0.3s;box-shadow:0 6px 24px rgba(0,0,0,0.3)}
+.pronounce-popup{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1a1a2e;color:#fff;padding:12px 28px 14px;border-radius:14px;font-size:15px;text-align:center;z-index:9999;pointer-events:none;transition:opacity 0.3s;box-shadow:0 6px 24px rgba(0,0,0,0.3);max-width:92vw;width:max-content}
 
 
 /* STREAK */
@@ -1867,6 +1867,41 @@ function initSpeech(){
 // Map of pure consonant (with virama) → spoken syllable (browser TTS fallback only)
 const _csMap={'க்':'கா','ச்':'சா','ட்':'டா','த்':'தா','ப்':'பா','ற்':'றா','ங்':'ஙா','ஞ்':'ஞா','ண்':'ணா','ந்':'நா','ம்':'மா','ன்':'னா','ய்':'யா','ர்':'ரா','ல்':'லா','வ்':'வா','ழ்':'ழா','ள்':'ளா'};
 
+// ── PRONUNCIATION TIPS for Hindi speakers ────────────────────────────────────
+// Keyed by FIRST character of the Tamil text tapped
+const _pronTips={
+  'ழ':{
+    label:'ழ — सबसे मुश्किल sound!',
+    tip:'जीभ को मुँह के अंदर पीछे की तरफ मोड़ो — \"ल\" और \"ड़\" के बीच की आवाज़। Hindi में यह sound बिल्कुल नहीं है। धीरे-धीरे practice करो!',
+    eg:'வாழை (vaazhai) = केला  •  தமிழ் (tamizh) = तमिल'
+  },
+  'ண':{
+    label:'ண — retroflex ण',
+    tip:'जीभ की नोक को ऊपर तालु से लगाओ और पीछे मोड़ो — हिंदी \"ण\" जैसा पर और ज़्यादा retroflex। \"मण\" या \"पाण\" में जैसा।',
+    eg:'அண்ணா (anna) = भाई  •  தண்ணீர் (thanneer) = पानी'
+  },
+  'ற':{
+    label:'ற — sharp tapped र',
+    tip:'\"र\" से ज़्यादा sharp और tapped — word की शुरुआत में \"ट्र\" जैसा, बीच में \"ड्र\" जैसा। जीभ एक बार तालु से touch करके वापस।',
+    eg:'ரூபாய் (roopaai) = रुपया  •  பேருந்து (perundu) = बस'
+  },
+  'ட':{
+    label:'ட — retroflex ट',
+    tip:'जीभ को ऊपर तालु की तरफ मोड़कर touch करो — हिंदी \"ट\" जैसा पर और पीछे। \"ट्रेन\" के \"ट\" जैसा feel।',
+    eg:'டீ (tee) = चाय  •  டாக்டர் (daaktar) = डॉक्टर'
+  },
+  'ள':{
+    label:'ள — retroflex ळ',
+    tip:'\"ल\" की तरह पर जीभ को और पीछे तालु से लगाओ — मराठी \"ळ\" जैसा। हिंदी \"ल\" से थोड़ा deeper।',
+    eg:'வீட்டில் (veettil) = घर में  •  தமிழ்நாடு (Tamil Nadu)'
+  },
+  'ங':{
+    label:'ங — nasal ङ',
+    tip:'\"अंग\" के बीच का \"ङ\" sound — नाक से निकलती आवाज़। यह letter अकेले word शुरू नहीं करता, बीच या अंत में ही आता है।',
+    eg:'தமிழ்நாங்கள் (naangal) = हम लोग  •  மங்கல் (mangal) = शुभ'
+  },
+};
+
 let _slowMode=false;
 function _browserSpeak(text){
   if(!window.speechSynthesis||!speechReady)return;
@@ -1933,16 +1968,27 @@ function showPP(t,r){
   _ppLastText=t;_ppLastRoman=r||'';
   const p=document.getElementById('pp');
   const slowActive=_slowMode?'background:#f59e0b;color:#1a1a2e;':'background:#2a2a4e;color:#facc15;';
+  // Look up pronunciation tip by first character
+  const tip=_pronTips[t.charAt(0)];
+  const tipHtml=tip
+    ?'<div style="margin-top:10px;background:rgba(245,158,11,0.18);border-left:3px solid #f59e0b;border-radius:0 8px 8px 0;padding:8px 10px;text-align:left;max-width:300px;margin-left:auto;margin-right:auto">'+
+       '<div style="font-size:11px;font-weight:700;color:#fcd34d;margin-bottom:3px">'+tip.label+'</div>'+
+       '<div style="font-size:11px;color:#ffe4a0;line-height:1.5">'+tip.tip+'</div>'+
+       '<div style="font-size:10px;color:#fbbf24;margin-top:4px;opacity:0.85">'+tip.eg+'</div>'+
+     '</div>'
+    :'';
   p.innerHTML=
     '<span style="font-size:22px;display:block;line-height:1.3">'+t+'</span>'+
     (r?'<span style="font-size:12px;opacity:0.8;display:block;margin-top:3px">'+r+'</span>':'')+
+    tipHtml+
     '<div style="display:flex;gap:8px;justify-content:center;margin-top:8px;pointer-events:auto">'+
       '<button onclick="speak(_ppLastText,_ppLastRoman)" style="background:#2a2a4e;color:#fff;border:none;border-radius:20px;padding:4px 14px;font-size:12px;cursor:pointer;">🔊 फिर सुनें</button>'+
       '<button id="pp-slow-btn" onclick="toggleSlowMode()" style="'+slowActive+'border:none;border-radius:20px;padding:4px 14px;font-size:12px;cursor:pointer;font-weight:700;">🐢 '+(  _slowMode?'Slow ON':'Slow'  )+'</button>'+
     '</div>';
   p.style.opacity='1';p.style.pointerEvents='auto';
   clearTimeout(ppTimer);
-  ppTimer=setTimeout(()=>{p.style.opacity='0';p.style.pointerEvents='none';},4500);
+  // Give extra time to read when a tip is shown
+  ppTimer=setTimeout(()=>{p.style.opacity='0';p.style.pointerEvents='none';},tip?8000:4500);
 }
 function toggleSlowMode(){
   _slowMode=!_slowMode;
@@ -2136,7 +2182,11 @@ function showLetterTab(tab){
     grid.style.display='';vtbl.style.display='none';
     tip.textContent='किसी भी letter को tap करें सुनने के लिए।';
     const data=tab==='vowels'?vowels:tab==='hard'?consHard:tab==='nasal'?consNasal:tab==='medium'?consMed:[...vowels,...allCons];
-    grid.innerHTML=data.map(l=>`<div class="letter-card" onclick="sah('${l.t}',this,'${l.r}')"><span class="lc-tamil">${l.t}</span><span class="lc-roman">${l.r}</span><span class="lc-hindi">${l.h}</span></div>`).join('');
+    grid.innerHTML=data.map(l=>{
+      const hasHardTip=_pronTips[l.t.charAt(0)];
+      const badge=hasHardTip?'<span style="position:absolute;top:4px;right:4px;font-size:8px;background:#ef4444;color:#fff;border-radius:99px;padding:1px 4px;font-weight:700;line-height:1.4">कठिन</span>':'';
+      return`<div class="letter-card" style="position:relative" onclick="sah('${l.t}',this,'${l.r}')">${badge}<span class="lc-tamil">${l.t}</span><span class="lc-roman">${l.r}</span><span class="lc-hindi">${l.h}</span></div>`;
+    }).join('');
   }
 }
 
